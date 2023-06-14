@@ -8,33 +8,11 @@ package proyecto_final;
 public class Pila {
     private int vectorPila[];
     private int cima;
-
-    public Pila(int[] vectorPila, int cima) {
-        this.vectorPila = vectorPila;
-        this.cima = cima;
-    }
-
-    public int[] getVectorPila() {
-        return vectorPila;
-    }
-
-    public void setVectorPila(int[] vectorPila) {
-        this.vectorPila = vectorPila;
-    }
-
-    public int getCima() {
-        return cima;
-    }
-
-    public void setCima(int cima) {
-        this.cima = cima;
-    }
-    
+  
     public Pila(int tamano){
         vectorPila = new int [tamano];
         cima = 0 ;
-    }
-    
+    }    
     /*public void inicializaPila (int tamano){
         vectorPila = new int[tamano];
     }*/
@@ -51,7 +29,7 @@ public class Pila {
     public int pop(){
         int eliminar = 0;
         if (cima == 0){
-            System.out.println("pila vacia");
+            System.out.println("La pila esta vacia");
         } else{
             eliminar = vectorPila[cima - 1];
             cima --;
