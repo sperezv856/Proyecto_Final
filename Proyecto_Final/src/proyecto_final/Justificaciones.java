@@ -1,5 +1,7 @@
 package proyecto_final;
 
+import java.util.Date;
+
 /**
  *
  * @author josep
@@ -7,10 +9,10 @@ package proyecto_final;
 public class Justificaciones {
     private int idJustificacion;
     private String observaciones;
-    private String fecha;
+    private Date fecha;
     private int idGuia;
 
-    public Justificaciones(int idJustificacion, String observaciones, String fecha, int idGuia) {
+    public Justificaciones(int idJustificacion, String observaciones, Date fecha, int idGuia) {
         this.idJustificacion = idJustificacion;
         this.observaciones = observaciones;
         this.fecha = fecha;
@@ -33,11 +35,11 @@ public class Justificaciones {
         this.observaciones = observaciones;
     }
 
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 

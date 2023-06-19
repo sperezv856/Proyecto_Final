@@ -1,17 +1,19 @@
 package proyecto_final;
 
+import java.util.Date;
+
 /**
  *
  * @author josep
  */
 public class Servicio extends Sistema{
-    private String fechaServicio;
+    private Date fechaServicio;
     private String observaciones;
     private String instrucciones;
     private int cedula;
     private int idTipoProducto;
 
-    public Servicio(String fechaServicio, String observaciones, String instrucciones, int cedula, int idTipoProducto, int idServicio) {
+    public Servicio(Date fechaServicio, String observaciones, String instrucciones, int cedula, int idTipoProducto, int idServicio) {
         super(idServicio);
         this.fechaServicio = fechaServicio;
         this.observaciones = observaciones;
@@ -20,11 +22,11 @@ public class Servicio extends Sistema{
         this.idTipoProducto = idTipoProducto;
     }
 
-    public String getFechaServicio() {
+    public Date getFechaServicio() {
         return fechaServicio;
     }
 
-    public void setFechaServicio(String fechaServicio) {
+    public void setFechaServicio(Date fechaServicio) {
         this.fechaServicio = fechaServicio;
     }
 
