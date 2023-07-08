@@ -55,28 +55,29 @@ public class ManejoProductos {
         }
     }
 
-    public void BuscarRuta(int cdp) {
+    public void BuscarProducto(int cdp) {
         NodoListaSimple actual = new NodoListaSimple();
         actual = getPrimero();
         while (actual != null) {
             if (actual.getProducto().getIdTipoProducto()== cdp) {
                 System.out.println("Producto Encontrado");
                 System.out.println("Id de producto: " + actual.getProducto().getIdTipoProducto());
-                System.out.println("Provincia: " + actual.getRuta().getProvincia());
-                System.out.println("Canton: " + actual.getRuta().getCanton());
+                System.out.println("Observacion: " + actual.getProducto().getObservaciones());
+                System.out.println("Monto: " + actual.getProducto().getMonto());
+                System.out.println("Estado: " + actual.getProducto().getEstado());
             }
             actual = actual.getSiguiente();
         }
-        System.out.println("Ruta no encontrada");
+        System.out.println("Producto no encontrado");
     }
 
-    public void EliminarRuta(String rutn) {
+    public void EliminarProducto(int cdp) {
         NodoListaSimple actual = new NodoListaSimple();
         NodoListaSimple anterior = new NodoListaSimple();
         actual = getPrimero();
         anterior = null;
         while (actual != null) {
-            if (actual.getRuta().getRutaNombre().equals(rutn)) {
+            if (actual.getProducto().getIdTipoProducto()== cdp) {
                 if (actual == getPrimero()) {
                     setPrimero(getPrimero().getSiguiente());
                 } else {
@@ -88,20 +89,22 @@ public class ManejoProductos {
         }
     }
 
-    public void ModificarRuta(String rutn) {
+    public void ModificarRuta(int cdp) {
         NodoListaSimple actual = getPrimero();
         while (actual != null) {
-            if (actual.getRuta().getRutaNombre().equals(rutn)) {
-                System.out.println("Ingrese el nuevo nombre de ruta: ");
-                String nuevoNombre = scanner.nextLine();
-                actual.getRuta().setRutaNombre(nuevoNombre);
-                System.out.println("Ingrese la nueva Provincia: ");
-                String nuevaProvincia = scanner.nextLine();
-                actual.getRuta().setProvincia(nuevaProvincia);
-                System.out.println("Ingrese el nuevo Canton: ");
-                String nuevoCanton = scanner.nextLine();
-                actual.getRuta().setCanton(nuevoCanton);
-                System.out.println("Ruta modificada correctamente");
+            if (actual.getProducto().getIdTipoProducto()== cdp) {
+                System.out.println("Ingrese el nuevo ID del producto: ");
+                int nuevoID = scanner.nextInt();
+                actual.getProducto().setIdTipoProducto(nuevoID);
+                System.out.println("Ingrese las nuevas observaciones: ");
+                String nuevaObservacion = scanner.nextLine();
+                actual.getProducto().setObservaciones(nuevaObservacion);
+                System.out.println("Ingrese el nuevo Monto: ");
+                int nuevoMonto = scanner.nextInt();
+                actual.getProducto().setMonto(nuevoMonto);
+                String nuevoEstado = scanner.nextLine();
+                actual.getProducto().setEstado(nuevoEstado);
+                System.out.println("Producto modificado correctamente");
             }
             actual = actual.getSiguiente();
         }
