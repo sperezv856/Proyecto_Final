@@ -12,7 +12,7 @@ public class Servicio{
     private String observaciones;
     private String instrucciones;
 
-    public Servicio(Date fechaServicio, String observaciones, String instrucciones, int cedula, int idTipoProducto, int IdServicio) {
+    public Servicio(Date fechaServicio, String observaciones, String instrucciones, int IdServicio) {
         this.IdServicio = IdServicio;
         this.fechaServicio = fechaServicio;
         this.observaciones = observaciones;
