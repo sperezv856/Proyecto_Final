@@ -98,11 +98,11 @@ public class ManejoRutas {
                 System.out.println("Ingrese el nuevo Canton: ");
                 String nuevoCanton = scanner.nextLine();
                 actual.getRuta().setCanton(nuevoCanton);
+                System.out.println("Ruta modificada correctamente");
             }
             actual = actual.getSiguiente();
-            System.out.println("Ruta modificada correctamente");
         }
-    
+        System.out.println("Ruta no encontrada");
     }
 
 }

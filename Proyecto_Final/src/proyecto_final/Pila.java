@@ -13,9 +13,6 @@ public class Pila {
         vectorPila = new int [tamano];
         cima = 0 ;
     }    
-    /*public void inicializaPila (int tamano){
-        vectorPila = new int[tamano];
-    }*/
     
     public void push (int dato) {
     	if(pilaLlena(tamano())==false) {

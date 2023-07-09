@@ -4,13 +4,12 @@ package proyecto_final;
  *
  * @author josep
  */
-public class DetalleServicio extends Sistema{
+public class DetalleServicio{
     private int monto;
     private String observaciones;
     private String estado;
 
-    public DetalleServicio(int monto, String observaciones, String estado, int idServicio) {
-        super(idServicio);
+    public DetalleServicio(int monto, String observaciones, String estado) {
         this.monto = monto;
         this.observaciones = observaciones;
         this.estado = estado;

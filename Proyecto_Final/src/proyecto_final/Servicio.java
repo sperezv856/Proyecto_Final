@@ -6,20 +6,25 @@ import java.util.Date;
  *
  * @author josep
  */
-public class Servicio extends Sistema{
+public class Servicio{
+    private int IdServicio;
     private Date fechaServicio;
     private String observaciones;
     private String instrucciones;
-    private int cedula;
-    private int idTipoProducto;
 
-    public Servicio(Date fechaServicio, String observaciones, String instrucciones, int cedula, int idTipoProducto, int idServicio) {
-        super(idServicio);
+    public Servicio(Date fechaServicio, String observaciones, String instrucciones, int cedula, int idTipoProducto, int IdServicio) {
+        this.IdServicio = IdServicio;
         this.fechaServicio = fechaServicio;
         this.observaciones = observaciones;
         this.instrucciones = instrucciones;
-        this.cedula = cedula;
-        this.idTipoProducto = idTipoProducto;
+    }
+
+    public int getIdServicio() {
+        return IdServicio;
+    }
+
+    public void setIdServicio(int IdServicio) {
+        this.IdServicio = IdServicio;
     }
 
     public Date getFechaServicio() {
@@ -44,21 +49,5 @@ public class Servicio extends Sistema{
 
     public void setInstrucciones(String instrucciones) {
         this.instrucciones = instrucciones;
-    }
-
-    public int getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(int cedula) {
-        this.cedula = cedula;
-    }
-
-    public int getIdTipoProducto() {
-        return idTipoProducto;
-    }
-
-    public void setIdTipoProducto(int idTipoProducto) {
-        this.idTipoProducto = idTipoProducto;
     }
 }
