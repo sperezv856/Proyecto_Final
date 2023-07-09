@@ -13,12 +13,59 @@ import java.util.Scanner;
  */
 public class Guia {
     Scanner scanner = new Scanner(System.in);
-    private int IdGuia;
-    
-    public void CrearGuia(Cliente cliente, Servicio servicio, DetalleServicio detalle, TipoProducto producto){
-        
+    private Cliente cliente;
+    private Servicio servicio;
+    private DetalleServicio detalle;
+    private ManejoProductos producto;
+
+    public Guia(Cliente cliente, Servicio servicio, DetalleServicio detalle, ManejoProductos producto) {
+        this.cliente = cliente;
+        this.servicio = servicio;
+        this.detalle = detalle;
+        this.producto = producto;
     }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Servicio getServicio() {
+        return servicio;
+    }
+
+    public void setServicio(Servicio servicio) {
+        this.servicio = servicio;
+    }
+
+    public DetalleServicio getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(DetalleServicio detalle) {
+        this.detalle = detalle;
+    }
+
+    public ManejoProductos getProducto() {
+        return producto;
+    }
+
+    public void setProducto(ManejoProductos producto) {
+        this.producto = producto;
+    } 
+    
     public void CrearGuia(){
+        setCliente(crearCliente());
+        setServicio(crearServicio());
+        setDetalle(crearDetalle());
+        setProducto(buscarProducto());
+        
+        Guia guia = new Guia(cliente, servicio, detalle, producto);
+    }
+    public void ManejoGuia(){
         
     }
     public Cliente crearCliente(){
@@ -64,6 +111,9 @@ public class Guia {
         return servicio;
     }
     public DetalleServicio crearDetalle(){
+        System.out.println("Indique el numero de guia para el servicio: ");
+        int idGuia = scanner.nextInt();
+        scanner.nextLine();
         System.out.println("Indique el monto del servicio: ");
         int monto = scanner.nextInt();
         scanner.nextLine();
@@ -71,10 +121,18 @@ public class Guia {
         String observaciones = scanner.nextLine();
         System.out.println("Indique el estado del servicio (Generada / En transito / Entregada / No entregada): ");
         String estado = scanner.nextLine();
-        DetalleServicio detalle = new DetalleServicio(monto, observaciones, estado);
+        DetalleServicio detalle = new DetalleServicio(idGuia,monto, observaciones, estado);
+        detalle.setIdGuia(idGuia);
         detalle.setObservaciones(observaciones);
         detalle.setMonto(monto);
         detalle.setEstado(estado);
         return detalle;
     } 
+    public ManejoProductos buscarProducto(){
+        ManejoProductos producto= new ManejoProductos();
+        System.out.println("Ingrese el codigo de producto a seleccionar. ");
+        int cdp= scanner.nextInt();
+        producto.buscarProducto(cdp);
+        return producto;
+    }
 }

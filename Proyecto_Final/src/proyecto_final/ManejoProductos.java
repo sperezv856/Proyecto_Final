@@ -55,7 +55,7 @@ public class ManejoProductos {
         }
     }
 
-    public void BuscarProducto(int cdp) {
+    public TipoProducto buscarProducto(int cdp) {
         NodoListaSimple actual = new NodoListaSimple();
         actual = getPrimero();
         while (actual != null) {
@@ -65,10 +65,12 @@ public class ManejoProductos {
                 System.out.println("Observacion: " + actual.getProducto().getObservaciones());
                 System.out.println("Monto: " + actual.getProducto().getMonto());
                 System.out.println("Estado: " + actual.getProducto().getEstado());
+                return actual.getProducto();
             }
             actual = actual.getSiguiente();
         }
         System.out.println("Producto no encontrado");
+        return null;
     }
 
     public void EliminarProducto(int cdp) {
@@ -89,7 +91,7 @@ public class ManejoProductos {
         }
     }
 
-    public void ModificarRuta(int cdp) {
+    public void ModificarProducto(int cdp) {
         NodoListaSimple actual = getPrimero();
         while (actual != null) {
             if (actual.getProducto().getIdTipoProducto()== cdp) {
