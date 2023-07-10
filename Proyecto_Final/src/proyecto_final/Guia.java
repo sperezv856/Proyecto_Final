@@ -65,9 +65,7 @@ public class Guia {
         
         Guia guia = new Guia(cliente, servicio, detalle, producto);
     }
-    public void ManejoGuia(){
-        
-    }
+
     public Cliente crearCliente(){
         System.out.println("Indique el numero de cedula: ");
         int cedula = scanner.nextInt();
