@@ -10,13 +10,11 @@ public class Justificaciones {
     private int idJustificacion;
     private String observaciones;
     private Date fecha;
-    private int idGuia;
 
-    public Justificaciones(int idJustificacion, String observaciones, Date fecha, int idGuia) {
+    public Justificaciones(int idJustificacion, String observaciones, Date fecha) {
         this.idJustificacion = idJustificacion;
         this.observaciones = observaciones;
         this.fecha = fecha;
-        this.idGuia = idGuia;
     }
 
     public int getIdJustificacion() {
@@ -42,14 +40,5 @@ public class Justificaciones {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-
-    public int getIdGuia() {
-        return idGuia;
-    }
-
-    public void setIdGuia(int idGuia) {
-        this.idGuia = idGuia;
-    }
-    
-    
+       
 }

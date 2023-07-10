@@ -2,7 +2,7 @@ package proyecto_final;
 
 /**
  *
- * @author josep
+ * @author Susana Vargas López
  */
 public class ManejoGuia {
     private Guia vectorPila[];
@@ -64,7 +64,7 @@ public class ManejoGuia {
         }
         return eliminar;
     }
-    public void mostrarPila() {
+    public void MostrarPilaGuia(Guia guia) {
         Guia aux = null;
         ManejoGuia pilaBackup = new ManejoGuia(tamano());
         while (pilaVacia() == false) {            
@@ -78,6 +78,31 @@ public class ManejoGuia {
             aux = pilaBackup.popGuia();
             push(aux);
         }
+    }
+    public Guia BuscarPilaGuia(int idGuia) {
+        int cont = 0;
+        Guia aux = null;
+        Guia guiaEncontrada = null;
+        ManejoGuia pilaBackup = new ManejoGuia(tamano());
+        while (pilaVacia() == false) {            
+            aux = popGuia();
+            cont ++;
+            if (aux.getDetalle().getIdGuia() == idGuia) {
+                guiaEncontrada = aux;
+                System.out.println("Se encontro la guia solicitada en la posicion # "+ cont + " Fue ingresada el: " + aux.getServicio().getFechaServicio().toString());
+            } 
+            if (pilaBackup.pilaLlena(tamano())== false) {
+                pilaBackup.push(aux);
+            }
+        }
+        while (pilaBackup.pilaVacia() == false) {            
+            aux = pilaBackup.popGuia();
+            push(aux);
+        }
+        return guiaEncontrada;
+    }
+    public void mostrarCantElementos(){
+        System.out.println("La cantidad de guias agregadas es de: " + getCima());
     }
     
 }
