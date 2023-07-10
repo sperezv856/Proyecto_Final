@@ -10,6 +10,7 @@ public class ManejoJustificaciones {
     
     public ManejoJustificaciones(int tamano){
         vectorPila = new ObjetoJustificaciones[tamano];
+        tamano = 15;
         cima =0;
     }
 
@@ -102,5 +103,24 @@ public class ManejoJustificaciones {
     }
     public void mostrarCantElementos(){
         System.out.println("La cantidad de justificaciones agregadas es de: "+ getCima());
+    }
+    public void recolector(){
+        if (pilaLlena(tamano())== true) {
+            ObjetoJustificaciones aux = null;
+            ManejoJustificaciones pilaBackup = new ManejoJustificaciones(tamano());
+            while (pilaVacia() == false) {                
+                aux = popJustificaciones();
+                if (pilaBackup.pilaLlena(tamano())== false) {
+                    pilaBackup.push(aux);
+                }
+            }
+            for (int i = 0; i < 10; i++) {
+                pilaBackup.popJustificaciones();
+            }
+            while (pilaBackup.pilaVacia()== false) {                
+                aux = pilaBackup.popJustificaciones();
+                push(aux);
+            }
+        }
     }
 }
