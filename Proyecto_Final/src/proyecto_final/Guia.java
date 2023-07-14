@@ -11,6 +11,8 @@ import java.util.Scanner;
  *
  * @author josep
  */
+/*Clase para el objeto guia, primeramente se genera lo necesario para crear el objeto con 
+su contructor y Getter y Setter*/
 public class Guia {
     Scanner scanner = new Scanner(System.in);
     private Cliente cliente;
@@ -56,7 +58,9 @@ public class Guia {
     public void setProducto(ManejoProductos producto) {
         this.producto = producto;
     } 
-    
+    /*En el siguiente metodo se pretende crear una guia completa con todos los
+    componentes necesarios, Cliente, Servicio, Detalle de servicio y Producto. 
+    Por esta razon debemos generar un objeto Guia con todos los objetos mencionados*/
     public void CrearGuia(){
         setCliente(crearCliente());
         setServicio(crearServicio());
@@ -65,7 +69,8 @@ public class Guia {
         
         Guia guia = new Guia(cliente, servicio, detalle, producto);
     }
-
+    /*Esta funcion solicita al usuario los datos necesarios para crear el objeto Cliente
+    Nota: Estoy evaluando si esta funcion deberia de ir aca o en la clase de Cliente*/
     public Cliente crearCliente(){
         System.out.println("Indique el numero de cedula: ");
         int cedula = scanner.nextInt();
@@ -91,6 +96,8 @@ public class Guia {
         
         return cliente;
     } 
+     /*Esta funcion solicita al usuario los datos necesarios para crear el objeto Servicio
+    Nota: Estoy evaluando si esta funcion deberia de ir aca o en la clase de Servicio*/
     public Servicio crearServicio(){
         Date fecha = new Date();
         System.out.println("Indique el Id del servicio: ");
@@ -108,6 +115,8 @@ public class Guia {
         
         return servicio;
     }
+     /*Esta funcion solicita al usuario los datos necesarios para crear el objeto Detalle de servicio
+    Nota: Estoy evaluando si esta funcion deberia de ir aca o en la clase de DetalleServicio*/
     public DetalleServicio crearDetalle(){
         System.out.println("Indique el numero de guia para el servicio: ");
         int idGuia = scanner.nextInt();
@@ -126,6 +135,9 @@ public class Guia {
         detalle.setEstado(estado);
         return detalle;
     } 
+     /*Esta funcion solicita al usuario seleccionar el producto de una lista previamente creada
+    una vez seleccionado envia el Objeto para generar la guia.
+    Nota: Estoy evaluando si esta funcion deberia de ir aca o en la clase de Producto*/
     public ManejoProductos buscarProducto(){
         ManejoProductos producto= new ManejoProductos();
         System.out.println("Ingrese el codigo de producto a seleccionar. ");

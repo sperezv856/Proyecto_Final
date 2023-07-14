@@ -4,6 +4,9 @@ package proyecto_final;
  *
  * @author josep
  */
+/*Clase detalle de Servicio, aca se genera la clase principal
+por medio de un objeto llamado DetalleServicio. Ademas se incluyen sus respectivos
+Getter y Setter*/
 public class DetalleServicio{
     private int idGuia;
     private int monto;

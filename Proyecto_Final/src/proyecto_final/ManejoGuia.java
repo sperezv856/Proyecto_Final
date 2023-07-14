@@ -4,6 +4,8 @@ package proyecto_final;
  *
  * @author Susana Vargas López
  */
+/*ManejoGuia es una clase que ejecuta todas las funciones o metodos correspondientes
+a el manejo de la Pila de Guias. Se incluye constructor, Getter y setter*/
 public class ManejoGuia {
     private Guia vectorPila[];
     private int cima;
@@ -46,6 +48,7 @@ public class ManejoGuia {
             return false;
         }
     }
+    /*Este metodo hace el push del objeto Guia completo a la pila */
     public void push (Guia guia){
         if (pilaLlena(tamano())== false) {
             vectorPila[getCima()] = guia;
@@ -54,6 +57,7 @@ public class ManejoGuia {
             System.out.println("La pila esta llena. ");
         }
     }
+     /*Este metodo hace el pop del objeto Guia completo a la pila */
     public Guia popGuia (){
         Guia eliminar = null;
         if (getCima()==0) {
@@ -64,6 +68,8 @@ public class ManejoGuia {
         }
         return eliminar;
     }
+     /*Este metodo muestra la pila completa de Guia sin perder los valores de la
+    pila original*/
     public void MostrarPilaGuia(Guia guia) {
         Guia aux = null;
         ManejoGuia pilaBackup = new ManejoGuia(tamano());
@@ -79,6 +85,8 @@ public class ManejoGuia {
             push(aux);
         }
     }
+     /*Este metodo busca en la pila completa de Guia por medio del idGuia
+    sin perder los valores de la pila original*/
     public Guia BuscarPilaGuia(int idGuia) {
         int cont = 0;
         Guia aux = null;
@@ -101,6 +109,7 @@ public class ManejoGuia {
         }
         return guiaEncontrada;
     }
+     /*Este metodo muestra la cantidad de elementos presente en la pila Guia*/
     public void mostrarCantElementos(){
         System.out.println("La cantidad de guias agregadas es de: " + getCima());
     }

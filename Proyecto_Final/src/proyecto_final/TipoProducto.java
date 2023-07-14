@@ -4,6 +4,7 @@ package proyecto_final;
  *
  * @author josep
  */
+//Clase para generar el objeto TipoProducto con sus Getter y Setter
 public class TipoProducto {
     private int idTipoProducto;
     private int monto;

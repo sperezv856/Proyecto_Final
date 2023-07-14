@@ -4,6 +4,8 @@ package proyecto_final;
  *
  * @author josep
  */
+/*Clase de cliente que hereda parametros de la clase persona, se incluyen todos los 
+Getter y Setter necesarios asi como el constructor*/
 public class Cliente extends Persona{
     private String email;
     private String direccion;

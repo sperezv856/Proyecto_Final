@@ -6,6 +6,7 @@ import java.util.Date;
  *
  * @author josep
  */
+// Clase para generar el objeto Servicio con sus Getter y Setter
 public class Servicio{
     private int IdServicio;
     private Date fechaServicio;

@@ -6,6 +6,8 @@ import java.util.Date;
  *
  * @author josep
  */
+/*Clase necesaria para crear el objeto Justificaciones con sus respectivos Getter
+Setter y constructor*/
 public class Justificaciones {
     private int idJustificacion;
     private String observaciones;

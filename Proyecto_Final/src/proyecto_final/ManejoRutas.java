@@ -6,6 +6,8 @@ import java.util.Scanner;
  *
  * @author josep
  */
+/*Clase para hacer el manejo de las rutas por medio de una lista Simple,
+Se incluyen Getter y Setter*/
 public class ManejoRutas {
     Scanner scanner = new Scanner(System.in);
     private NodoListaSimple ultimo;
@@ -39,7 +41,7 @@ public class ManejoRutas {
             return false;
         }
     }
-
+    //Metodo para ingresar un nuevo objeto Ruta a la lista
     public void IngresarRuta(Ruta ruta) {
         NodoListaSimple nodoNuevo = new NodoListaSimple();
         nodoNuevo.setRuta(ruta);
@@ -53,7 +55,7 @@ public class ManejoRutas {
             setUltimo(nodoNuevo);
         }
     }
-
+    //Metodo para buscar un objeto Ruta por medio del nombre de la ruta llamado rutn
     public void BuscarRuta(String rutn) {
         NodoListaSimple actual = new NodoListaSimple();
         actual = getPrimero();
@@ -68,6 +70,7 @@ public class ManejoRutas {
         }
         System.out.println("Ruta no encontrada");
     }
+    //Metodo para eliminar un objeto Ruta por medio del nombre de la ruta llamado rutn
     public void EliminarRuta(String rutn){
         NodoListaSimple actual = new NodoListaSimple();
         NodoListaSimple anterior = new NodoListaSimple();
@@ -85,6 +88,8 @@ public class ManejoRutas {
             actual = actual.getSiguiente();
         }
     }
+    //Metodo para modificar un objeto Ruta por medio del nombre de la ruta llamado rutn
+    // Se deberia crear un submenu para solicitar al usuario cual parametro desea modificar
     public void ModificarRuta(String rutn){
         NodoListaSimple actual = getPrimero();
         while (actual != null) {            

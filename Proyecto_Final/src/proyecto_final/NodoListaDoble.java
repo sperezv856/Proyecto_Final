@@ -4,6 +4,7 @@ package proyecto_final;
  *
  * @author josep
  */
+//Clase para crear los nodos de la lista Doble, con Getter y Setter
 public class NodoListaDoble {
     private Gestor gestor;
     private NodoListaDoble siguiente;

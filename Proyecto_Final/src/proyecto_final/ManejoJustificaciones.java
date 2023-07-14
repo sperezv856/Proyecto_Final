@@ -2,8 +2,10 @@ package proyecto_final;
 
 /**
  *
- * @author josep
+ * @author Susana Vargas López
  */
+/*ManejoGuia es una clase que ejecuta todas las funciones o metodos correspondientes
+a el manejo de la Pila de Justificaciones. Se incluye constructor, Getter y setter*/
 public class ManejoJustificaciones {
     private ObjetoJustificaciones vectorPila [];
     private int cima;
@@ -46,6 +48,7 @@ public class ManejoJustificaciones {
             return false;
         }
     }
+    /*Este metodo hace el push del objeto ObjetoJustificaciones completo a la pila */
     public void push (ObjetoJustificaciones justificacion){
         if (pilaLlena(tamano())== false) {
             vectorPila[getCima()] = justificacion;
@@ -54,6 +57,7 @@ public class ManejoJustificaciones {
             System.out.println("La pila esta llena. ");
         }
     }
+    /*Este metodo hace el pop del objeto ObjetoJustificaciones completo a la pila */
     public ObjetoJustificaciones popJustificaciones (){
         ObjetoJustificaciones eliminar = null;
         if (getCima()==0) {
@@ -64,6 +68,8 @@ public class ManejoJustificaciones {
         }
         return eliminar;
     }
+    /*Este metodo muestra la pila completa de ObjetoJustificaciones sin perder los valores de la
+    pila original*/
     public void MostrarPilaObjetoJustificaciones (ObjetoJustificaciones justificacion){
         ObjetoJustificaciones aux = null;
         ManejoJustificaciones pilaBackup = new ManejoJustificaciones(tamano());
@@ -79,6 +85,8 @@ public class ManejoJustificaciones {
             push(aux);
         }
     }
+    /*Este metodo busca en la pila completa de Justificaciones por medio del idJustificacion
+    sin perder los valores de la pila original*/
     public ObjetoJustificaciones BuscarJustificaciones(int idJustificacion){
         int cont = 0;
         ObjetoJustificaciones aux = null;
@@ -101,9 +109,13 @@ public class ManejoJustificaciones {
         }
         return justificacionEncontrada;
     }
+    /*Este metodo muestra la cantidad de elementos presente en la pila Justificaciones*/
     public void mostrarCantElementos(){
         System.out.println("La cantidad de justificaciones agregadas es de: "+ getCima());
     }
+    /*En el metodo recolector se comprueba si la pila se encuentra Llena (15 posiciones), 
+    si esto es asi tiene una funcion para pasar todos los elementos a una pila de Back Up,
+    pero a la hora de regresarlos hace pop de los 10 primeros y regresa solo los ultimos 5*/
     public void recolector(){
         if (pilaLlena(tamano())== true) {
             ObjetoJustificaciones aux = null;

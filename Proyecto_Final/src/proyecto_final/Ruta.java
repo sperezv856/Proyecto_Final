@@ -4,6 +4,7 @@ package proyecto_final;
  *
  * @author josep
  */
+// Clase para generar un objeto Ruta con sus Getter y Setter
 public class Ruta {
     private String provincia;
     private String canton;

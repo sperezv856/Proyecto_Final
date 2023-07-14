@@ -8,6 +8,8 @@ package proyecto_final;
  *
  * @author josep
  */
+/*Clase dedicada para crear el objeto Mensajero que tiene herencia de Persona,
+Se incluyen los Getter y Setter necesarios*/
 public class Mensajero extends Persona{
     private int CodigoMensajero;
     private String Nacionalidad;

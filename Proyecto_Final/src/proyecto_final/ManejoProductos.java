@@ -6,6 +6,8 @@ import java.util.Scanner;
  *
  * @author josep
  */
+/*Clase para el manejo de los productos por medio de una lista Simple, incluye
+Getter y Setter*/
 public class ManejoProductos {
 
     Scanner scanner = new Scanner(System.in);
@@ -40,7 +42,7 @@ public class ManejoProductos {
             return false;
         }
     }
-
+    // Metodo para el ingreso de un nuevo objeto TipoProducto
     public void IngresarProducto(TipoProducto producto) {
         NodoListaSimple nodoNuevo = new NodoListaSimple();
         nodoNuevo.setProducto(producto);
@@ -54,7 +56,7 @@ public class ManejoProductos {
             setUltimo(nodoNuevo);
         }
     }
-
+    // Metodo para busqueda de un objeto TipoProducto por medio de el codigo de producto llamado cdp
     public TipoProducto buscarProducto(int cdp) {
         NodoListaSimple actual = new NodoListaSimple();
         actual = getPrimero();
@@ -72,7 +74,7 @@ public class ManejoProductos {
         System.out.println("Producto no encontrado");
         return null;
     }
-
+    // Metodo para eliminar un objeto TipoProducto por medio de el codigo de producto llamado cdp
     public void EliminarProducto(int cdp) {
         NodoListaSimple actual = new NodoListaSimple();
         NodoListaSimple anterior = new NodoListaSimple();
@@ -90,7 +92,8 @@ public class ManejoProductos {
             actual = actual.getSiguiente();
         }
     }
-
+    // Metodo para modificar un objeto TipoProducto por medio de el codigo de producto llamado cdp
+    // Se deberia crear un submenu para solicitar al usuario cual parametro desea modificar
     public void ModificarProducto(int cdp) {
         NodoListaSimple actual = getPrimero();
         while (actual != null) {

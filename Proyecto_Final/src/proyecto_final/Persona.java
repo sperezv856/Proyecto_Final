@@ -4,6 +4,7 @@ package proyecto_final;
  *
  * @author josep
  */
+//Clase de herencia utilizada por el Gestor, Cliente y Mensajero, con Getter y Setter
 public class Persona {
     private int cedula;
     private String NombreCompleto;

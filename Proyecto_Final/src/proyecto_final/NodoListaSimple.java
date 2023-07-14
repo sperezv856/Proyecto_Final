@@ -4,6 +4,9 @@ package proyecto_final;
  *
  * @author josep
  */
+/*Clase para crear los nodos de la lista Doble, con Getter y Setter, aca se tienen
+que asignar 2 tipos distintos de objetos admisibles, Tipo de Producto y Ruta, debido 
+a que se van a utilizar listas con distintos tipos de objetos*/
 public class NodoListaSimple {
     private TipoProducto producto;
     private Ruta ruta;

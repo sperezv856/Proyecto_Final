@@ -4,6 +4,8 @@ package proyecto_final;
  *
  * @author josep
  */
+/*Clase para generar el objeto Gestor, este Hereda argumentos de Persona. 
+Se incluyen Getter y Setter*/
 public class Gestor extends Persona{
     private String tipoGestor;
     private String funciones;
