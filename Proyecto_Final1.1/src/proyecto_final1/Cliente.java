@@ -1,4 +1,4 @@
-package proyecto_final;
+package proyecto_final1;
 
 import java.util.Scanner;
 
