@@ -99,7 +99,7 @@ public class ManejoCliente {
             }
             actual = actual.getSiguiente();
         }
-        System.out.println("Producto no encontrado");
+        System.out.println("Cliente no encontrado");
         return null;
     }
     public void EliminarCliente(int ced) {
@@ -146,7 +146,19 @@ public class ManejoCliente {
             }
             actual = actual.getSiguiente();
         }
-        System.out.println("Ruta no encontrada");
+        System.out.println("Cliente no encontrado");
+    }
+    public void MostrarClientes() {
+        NodoListaSimple aux = getPrimero();
+        while (aux != null) {            
+            Cliente cliente = aux.getCliente();
+            System.out.println("Cedula: " + aux.getCliente().getCedula()+ " Nombre completo: " 
+                    + aux.getCliente().getNombreCompleto() + " Telefono: " + aux.getCliente().getCelular() 
+                    + " Email: " + aux.getCliente().getEmail() + " Direccion: " + aux.getCliente().getDireccion() 
+                    + " Estado: " + aux.getCliente().getEstado());
+            aux = aux.getSiguiente();
+        }
+        
     }
     
 }

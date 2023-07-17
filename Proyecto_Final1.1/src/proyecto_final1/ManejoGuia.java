@@ -1,5 +1,7 @@
 package proyecto_final1;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Susana Vargas López
@@ -7,6 +9,8 @@ package proyecto_final1;
 /*ManejoGuia es una clase que ejecuta todas las funciones o metodos correspondientes
 a el manejo de la Pila de Guias. Se incluye constructor, Getter y setter*/
 public class ManejoGuia {
+    Scanner scanner = new Scanner(System.in);
+    private Guia guia;
     private Guia vectorPila[];
     private int cima;
     
@@ -70,7 +74,7 @@ public class ManejoGuia {
     }
      /*Este metodo muestra la pila completa de Guia sin perder los valores de la
     pila original*/
-    public void MostrarPilaGuia(Guia guia) {
+    public void MostrarPilaGuia() {
         Guia aux = null;
         ManejoGuia pilaBackup = new ManejoGuia(tamano());
         while (pilaVacia() == false) {            
