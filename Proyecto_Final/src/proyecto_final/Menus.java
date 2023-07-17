@@ -40,6 +40,7 @@ public class Menus {
                      cedula = 0;
                     Cliente cliente = new Cliente(email, direccion, telefono, cedula, NombreCompleto, estado);
                     cliente.crearCliente();
+                    
                     break;
                 /*case 2:
 

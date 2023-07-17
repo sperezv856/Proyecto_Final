@@ -108,6 +108,7 @@ public class ManejoProductos {
                 int nuevoMonto = scanner.nextInt();
                 actual.getProducto().setMonto(nuevoMonto);
                 String nuevoEstado = scanner.nextLine();
+                System.out.println("Ingrese el estado del producto (Activo /  Inactivo): ");
                 actual.getProducto().setEstado(nuevoEstado);
                 System.out.println("Producto modificado correctamente");
             }
