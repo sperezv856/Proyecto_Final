@@ -125,36 +125,33 @@ public class Menus {
             MostrarMenuProducto();
             opcion = scanner.nextInt();
             switch (opcion) {
-                case 1 -> {
+                case 1:
                     
                     manejoProductos.IngresarProducto();
                     break;
-                }
-                case 2 -> {
+                case 2:
                     System.out.println("Ingrese el numero de id a buscar: ");
                     int cdp = scanner.nextInt();
                     manejoProductos.buscarProducto(cdp);
                     break;
-                }
-                case 3 -> {
+                case 3:
                     System.out.println("Ingrese el numero de id a eliminar: ");
-                    int cdp = scanner.nextInt();
+                    cdp = scanner.nextInt();
                     manejoProductos.EliminarProducto(cdp);
                     break;
-                }
-                case 4 -> {
+                case 4:
                     System.out.println("Ingrese el numero de id a modificar: ");
-                    int cdp = scanner.nextInt();
+                    cdp = scanner.nextInt();
                     manejoProductos.ModificarProducto(cdp);
                     break;
-                }
-                case 5 -> {
+
+                case 5:
                     manejoProductos.MostrarProductos();
                     break;
-                }
                 
 
-                default -> System.out.println("Opcion incorrecta, intente de nuevo.");
+                default:
+                    System.out.println("Opcion incorrecta, intente de nuevo.");
             }
         } while (opcion != 6);
     }

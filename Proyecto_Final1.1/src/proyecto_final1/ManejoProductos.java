@@ -48,21 +48,7 @@ public class ManejoProductos {
         ultimo = null;
     }
 
-    // Metodo para el ingreso de un nuevo objeto TipoProducto
-    public void IngresarProducto() {
-        TipoProducto producto = crearProducto();
-        NodoListaSimple nodoNuevo = new NodoListaSimple();
-        nodoNuevo.setProducto(producto);
-        if (getPrimero() == null) {
-            setPrimero(nodoNuevo);
-            getPrimero().setSiguiente(nodoNuevo);
-            setUltimo(getPrimero());
-        } else {
-            getUltimo().setSiguiente(nodoNuevo);
-            nodoNuevo.setSiguiente(null);
-            setUltimo(nodoNuevo);
-        }
-    }
+  
 
     public TipoProducto crearProducto() {
         System.out.println("Indique el ID del producto: ");
@@ -81,6 +67,21 @@ public class ManejoProductos {
         producto.setMonto(monto);
         producto.setEstado(estado);
         return producto;
+    }
+      // Metodo para el ingreso de un nuevo objeto TipoProducto
+    public void IngresarProducto() {
+        TipoProducto producto = crearProducto();
+        NodoListaSimple nodoNuevo = new NodoListaSimple();
+        nodoNuevo.setProducto(producto);
+        if (getPrimero() == null) {
+            setPrimero(nodoNuevo);
+            setUltimo(nodoNuevo);
+            nodoNuevo.setSiguiente(null);
+        } else {
+            getUltimo().setSiguiente(nodoNuevo);
+            nodoNuevo.setSiguiente(null);
+            setUltimo(nodoNuevo);
+        }
     }
 
     // Metodo para busqueda de un objeto TipoProducto por medio de el codigo de producto llamado cdp
