@@ -67,8 +67,7 @@ public class ManejoCliente {
         cliente.setEstado(estado);
         return cliente;
     }
-    public void IngresarCliente() {
-        Cliente cliente = crearCliente();
+    public void IngresarCliente(Cliente cliente) {
         NodoListaSimple nodoNuevo = new NodoListaSimple();
         nodoNuevo.setCliente(cliente);
         if (getPrimero() == null) {

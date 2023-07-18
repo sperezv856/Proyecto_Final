@@ -18,7 +18,7 @@ public class ManejoGuia {
         vectorPila = new Guia [tamano];
         cima=0;
     }
-
+    
     public Guia[] getVectorPila() {
         return vectorPila;
     }
@@ -36,6 +36,14 @@ public class ManejoGuia {
     }
     public int tamano(){
         return getVectorPila().length;
+    }
+
+    public Guia getGuia() {
+        return guia;
+    }
+
+    public void setGuia(Guia guia) {
+        this.guia = guia;
     }
     
     public boolean pilaVacia(){
@@ -79,7 +87,7 @@ public class ManejoGuia {
         ManejoGuia pilaBackup = new ManejoGuia(tamano());
         while (pilaVacia() == false) {            
             aux = popGuia();
-            System.out.println(aux);
+            System.out.println(aux.toString());
             if (pilaBackup.pilaLlena(tamano())== false) {
                 pilaBackup.push(aux);
             } 

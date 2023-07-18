@@ -40,5 +40,7 @@ public class Cliente extends Persona{
     public void setCelular(int celular) {
         this.celular = celular;
     }
+
+
     
 }

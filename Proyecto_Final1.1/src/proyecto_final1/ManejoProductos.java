@@ -69,8 +69,7 @@ public class ManejoProductos {
         return producto;
     }
       // Metodo para el ingreso de un nuevo objeto TipoProducto
-    public void IngresarProducto() {
-        TipoProducto producto = crearProducto();
+    public void IngresarProducto(TipoProducto producto) {
         NodoListaSimple nodoNuevo = new NodoListaSimple();
         nodoNuevo.setProducto(producto);
         if (getPrimero() == null) {

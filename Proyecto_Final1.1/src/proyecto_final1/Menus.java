@@ -14,12 +14,16 @@ public class Menus {
     private Date fechaServicio = null;
     private String observaciones = null, instrucciones = null, estado = null;
     private int IdServicio = 0, idGuia =0, monto= 0;
+    private Cliente cliente;
+    private TipoProducto producto;
     ManejoCliente manejoCliente = new ManejoCliente();
+    
     ManejoProductos manejoProductos = new ManejoProductos();
+    
     Servicio servicio =  new Servicio(fechaServicio, observaciones, instrucciones, IdServicio);
     DetalleServicio detalle = new DetalleServicio(idGuia, monto, observaciones, estado);
    
-    Guia guia = new Guia(manejoCliente, servicio, detalle, manejoProductos);
+    Guia guia = new Guia(cliente, servicio, detalle, producto);
     ManejoGuia manejoGuia = new ManejoGuia(30);
     
 
@@ -77,8 +81,8 @@ public class Menus {
             opcion = scanner.nextInt();
             switch (opcion) {
                 case 1 -> {
-                    
-                    manejoCliente.IngresarCliente();
+                    Cliente cliente = manejoCliente.crearCliente();
+                    manejoCliente.IngresarCliente(cliente);
                     break;
                 }
                 case 2 -> {
@@ -126,8 +130,8 @@ public class Menus {
             opcion = scanner.nextInt();
             switch (opcion) {
                 case 1:
-                    
-                    manejoProductos.IngresarProducto();
+                    TipoProducto producto = manejoProductos.crearProducto();
+                    manejoProductos.IngresarProducto(producto);
                     break;
                 case 2:
                     System.out.println("Ingrese el numero de id a buscar: ");
@@ -172,7 +176,7 @@ public class Menus {
             opcion = scanner.nextInt();
             switch (opcion) {
                 case 1 -> {
-                    guia.CrearGuia();
+                    guia = guia.CrearGuia(manejoCliente, servicio, detalle, manejoProductos);
                     manejoGuia.push(guia);
                     break;
                 }
