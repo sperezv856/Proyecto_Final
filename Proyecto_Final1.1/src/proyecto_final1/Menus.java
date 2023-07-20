@@ -230,10 +230,8 @@ public class Menus {
         System.out.println("1. Revisar Backlog");
         System.out.println("2. Limpiar Backlog");
         System.out.println("3. Revisar detalles del servicio");
-        System.out.println("4. Buscar Guia");
-        System.out.println("5. Mostrar la cantidad de guias");
-        System.out.println("6. Bloqueo de ingresos");
-        System.out.println("7. Regresar al menu anterior");
+       
+        System.out.println("4. Regresar al menu anterior");
         System.out.println("Seleccione una opcion: ");
     }
 
@@ -256,22 +254,9 @@ public class Menus {
                     manejoGuia.RevisarDetalle();
                     break;
                 }
-                case 4 -> {
-                    System.out.println("Ingrese el numero de Guia a buscar: ");
-                    int idGuia = scanner.nextInt();
-                    manejoGuia.BuscarPilaGuia(idGuia);
-                    break;
-                }
-                case 5 -> {
-                    manejoGuia.mostrarCantElementos();
-                    break;
-                }
-                case 6 -> {
-                    manejoGuia.estadoServicio();
-                    break;
-                }
+                
             }
-        } while (opcion != 7);
+        } while (opcion != 4);
         System.out.println("Opcion incorrecta, intente de nuevo.");
     }
 }
