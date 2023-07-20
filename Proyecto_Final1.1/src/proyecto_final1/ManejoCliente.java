@@ -159,5 +159,13 @@ public class ManejoCliente {
         }
         
     }
+    public void IngresarDatosIniciales (){
+        Cliente cliente1 = new Cliente("jose.p.munoz85@gmail.com", "San Juan, Tibas", 87026720, 112350023, "Jose Pablo Munoz", "Activo");
+        IngresarCliente(cliente1);
+        Cliente cliente2 = new Cliente("lilyka71@gmail.com", "San Antonio, Escazu", 87234175, 123456789, "Vanessa Moya Alfaro", "Activo");
+        IngresarCliente(cliente2);
+        Cliente cliente3 = new Cliente("jose.solis@hotmail.com", "Barva, Heredia", 7384455, 345124841, "Jose Antonio Solis", "Activo");
+        IngresarCliente(cliente3);
+    }
     
 }

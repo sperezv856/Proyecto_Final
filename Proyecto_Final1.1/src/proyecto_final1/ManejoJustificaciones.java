@@ -12,7 +12,6 @@ public class ManejoJustificaciones {
     
     public ManejoJustificaciones(int tamano){
         vectorPila = new ObjetoJustificaciones[tamano];
-        tamano = 15;
         cima =0;
     }
 
@@ -135,4 +134,10 @@ public class ManejoJustificaciones {
             }
         }
     }
+    public void LimpiarJustificaciones() {
+        while (!pilaVacia()) {            
+            popJustificaciones();
+        }
+    }
+
 }

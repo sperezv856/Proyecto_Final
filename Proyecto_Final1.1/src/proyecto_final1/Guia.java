@@ -110,4 +110,5 @@ public class Guia {
                 + " Observaciones: " + getProducto().getObservaciones() + " Monto " 
                 + getProducto().getMonto()+ " Estado del producto: " + getProducto().getEstado();
     }
+
 }

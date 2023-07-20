@@ -13,27 +13,39 @@ public class Menus {
     Scanner scanner = new Scanner(System.in);
     private Date fechaServicio = null;
     private String observaciones = null, instrucciones = null, estado = null;
-    private int IdServicio = 0, idGuia =0, monto= 0;
+    private int IdServicio = 0, idGuia = 0, monto = 0;
     private Cliente cliente;
     private TipoProducto producto;
     ManejoCliente manejoCliente = new ManejoCliente();
-    
     ManejoProductos manejoProductos = new ManejoProductos();
-    
-    Servicio servicio =  new Servicio(fechaServicio, observaciones, instrucciones, IdServicio);
+    ManejoJustificaciones manejoJustificaciones = new ManejoJustificaciones(15);
+    Servicio servicio = new Servicio(fechaServicio, observaciones, instrucciones, IdServicio);
     DetalleServicio detalle = new DetalleServicio(idGuia, monto, observaciones, estado);
-   
     Guia guia = new Guia(cliente, servicio, detalle, producto);
     ManejoGuia manejoGuia = new ManejoGuia(30);
-    
+    private static Menus instance = null;
+    private Menus(){
+    }
 
+    public static Menus getInstance() {
+         if (instance == null) {
+            instance = new Menus();
+        }
+        return instance;
+    }
+    
+    
+    public void IniciarDatos (){
+        manejoCliente.IngresarDatosIniciales();
+        manejoProductos.IngresarDatosIniciales();
+    }
     public static void MostrarOpcionesPrincipal() {
         System.out.println("-------- MENÚ PRINCIPAL -------");
         System.out.println("----- Programa de mensajeria -----");
         System.out.println("1. Menu Cliente");
         System.out.println("2. Menu Producto");
         System.out.println("3. Menu Guia");
-        System.out.println("4. Menu Ruta");
+        System.out.println("4. Menu Controles");
         System.out.println("5. Menu Producto");
         System.out.println("6. Menu Justificaciones");
         System.out.println("6. Menu Gestor");
@@ -43,8 +55,6 @@ public class Menus {
     }
 
     public void EscogerOpcionPrincipal() {
-        manejoCliente.inicializarLista();
-        manejoProductos.inicializarLista();
         do {
             MostrarOpcionesPrincipal();
             opcion = scanner.nextInt();
@@ -58,10 +68,12 @@ public class Menus {
                 case 3 -> {
                     EscogerOpcionGuia();
                 }
-
-                default -> System.out.println("Opcion incorrecta, intente de nuevo.");
+                case 4 -> {
+                    EscogerOpcionControles();
+                }
             }
         } while (opcion != 8);
+        System.out.println("Opcion incorrecta, intente de nuevo.");
     }
 
     public void MostrarMenuCliente() {
@@ -75,6 +87,7 @@ public class Menus {
         System.out.println("6. Regresar al menu anterior");
         System.out.println("Seleccione una opcion: ");
     }
+
     public void EscogerOpcionCliente() {
         do {
             MostrarMenuCliente();
@@ -106,13 +119,12 @@ public class Menus {
                 case 5 -> {
                     manejoCliente.MostrarClientes();
                     break;
-                }
-                
-
-                default -> System.out.println("Opcion incorrecta, intente de nuevo.");
+                }                 
             }
         } while (opcion != 6);
+        System.out.println("Opcion incorrecta, intente de nuevo.");
     }
+
     public void MostrarMenuProducto() {
         System.out.println("-------- MENÚ PRODUCTO -------");
         System.out.println("----- Programa de mensajeria -----");
@@ -124,6 +136,7 @@ public class Menus {
         System.out.println("6. Regresar al menu anterior");
         System.out.println("Seleccione una opcion: ");
     }
+
     public void EscogerOpcionProductos() {
         do {
             MostrarMenuProducto();
@@ -152,32 +165,37 @@ public class Menus {
                 case 5:
                     manejoProductos.MostrarProductos();
                     break;
-                
-
-                default:
-                    System.out.println("Opcion incorrecta, intente de nuevo.");
             }
         } while (opcion != 6);
+        System.out.println("Opcion incorrecta, intente de nuevo.");
     }
+
     public void MostrarMenuGuia() {
-        System.out.println("-------- MENÚ Guia -------");
+        System.out.println("-------- MENÚ GUIA -------");
         System.out.println("----- Programa de mensajeria -----");
         System.out.println("1. Ingresar Guia");
         System.out.println("2. Eliminar Guia");
         System.out.println("3. Mostrar las Guias");
         System.out.println("4. Buscar Guia");
         System.out.println("5. Mostrar la cantidad de guias");
-        System.out.println("6. Regresar al menu anterior");
+        System.out.println("6. Bloqueo de ingresos");
+        System.out.println("7. Regresar al menu anterior");
         System.out.println("Seleccione una opcion: ");
     }
+
     public void EscogerOpcionGuia() {
         do {
             MostrarMenuGuia();
             opcion = scanner.nextInt();
             switch (opcion) {
                 case 1 -> {
-                    guia = guia.CrearGuia(manejoCliente, servicio, detalle, manejoProductos);
-                    manejoGuia.push(guia);
+                    if (manejoGuia.isEstadoServicio()) {
+                        System.out.println("Opcion deshabilitada.");
+                    } else {
+                        guia = guia.CrearGuia(manejoCliente, servicio, detalle, manejoProductos);
+                        manejoGuia.push(guia);
+                    }
+
                     break;
                 }
                 case 2 -> {
@@ -198,13 +216,62 @@ public class Menus {
                     manejoGuia.mostrarCantElementos();
                     break;
                 }
-                
-
-                default -> System.out.println("Opcion incorrecta, intente de nuevo.");
+                case 6 -> {
+                    manejoGuia.estadoServicio();
+                    break;
+                }
             }
-        } while (opcion != 6);
+        } while (opcion != 7);
+        System.out.println("Opcion incorrecta, intente de nuevo.");
+    }
+    public void MostrarMenuControles() {
+        System.out.println("-------- MENÚ CONTROLES -------");
+        System.out.println("----- Programa de mensajeria -----");
+        System.out.println("1. Revisar Backlog");
+        System.out.println("2. Limpiar Backlog");
+        System.out.println("3. Revisar detalles del servicio");
+        System.out.println("4. Buscar Guia");
+        System.out.println("5. Mostrar la cantidad de guias");
+        System.out.println("6. Bloqueo de ingresos");
+        System.out.println("7. Regresar al menu anterior");
+        System.out.println("Seleccione una opcion: ");
+    }
+
+    public void EscogerOpcionControles() {
+        do {
+            MostrarMenuControles();
+            opcion = scanner.nextInt();
+            switch (opcion) {
+                case 1 -> {
+                    manejoGuia.mostrarCantElementos();
+                    manejoJustificaciones.mostrarCantElementos();
+                    break;
+                }
+                case 2 -> {
+                    manejoGuia.LimpiarGuia();
+                    manejoJustificaciones.LimpiarJustificaciones();
+                    break;
+                }
+                case 3 -> {
+                    manejoGuia.RevisarDetalle();
+                    break;
+                }
+                case 4 -> {
+                    System.out.println("Ingrese el numero de Guia a buscar: ");
+                    int idGuia = scanner.nextInt();
+                    manejoGuia.BuscarPilaGuia(idGuia);
+                    break;
+                }
+                case 5 -> {
+                    manejoGuia.mostrarCantElementos();
+                    break;
+                }
+                case 6 -> {
+                    manejoGuia.estadoServicio();
+                    break;
+                }
+            }
+        } while (opcion != 7);
+        System.out.println("Opcion incorrecta, intente de nuevo.");
     }
 }
-
-    
-

@@ -156,4 +156,13 @@ public class ManejoProductos {
         }
 
     }
+    public void IngresarDatosIniciales (){
+        TipoProducto producto1 = new TipoProducto(001, 35000, "Tennis Puma", "Activo");
+        IngresarProducto(producto1);
+        TipoProducto producto2 = new TipoProducto(002, 55000, "Gameboy", "Activo");
+        IngresarProducto(producto2);
+        TipoProducto producto3 = new TipoProducto(003, 150000, "Monitor LCD", "Activo");
+        IngresarProducto(producto3);
+        
+    }
 }
