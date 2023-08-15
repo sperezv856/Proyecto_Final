@@ -11,6 +11,8 @@ public class NodoListaSimple {
     private Cliente cliente;
     private TipoProducto producto;
     private Ruta ruta;
+    private Gestor gestor;
+    private Mensajero mensajero;
     private NodoListaSimple siguiente;
 
     public NodoListaSimple() {
@@ -47,6 +49,23 @@ public class NodoListaSimple {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+    public Gestor getGestor() {
+        return gestor;
+    }
+
+    public void setGestor(Gestor gestor) {
+        this.gestor = gestor;
+    }
+
+    public Mensajero getMensajero() {
+        return mensajero;
+    }
+
+    public void setMensajero(Mensajero mensajero) {
+        this.mensajero = mensajero;
+    }
+    
     
     
 }
