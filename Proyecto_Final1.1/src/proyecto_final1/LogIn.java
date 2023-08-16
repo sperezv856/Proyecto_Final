@@ -12,14 +12,15 @@ public class LogIn {
         ManejoUsuarios manejoUsuarios = new ManejoUsuarios();
         int opcion = 0;
         Scanner scanner = new Scanner(System.in);
-        System.out.println("-------- SISTEMA DE MENSAJERIA -------");
-        System.out.println("------------ LOG IN -----------------");
-        System.out.println("1. Ingresar al sistema");
-        System.out.println("2. Crear usuario");
-        System.out.println("3. Salir");
-        System.out.println("Seleccione una opcion: ");
-        opcion = scanner.nextInt();
+
         do {
+            System.out.println("-------- SISTEMA DE MENSAJERIA -------");
+            System.out.println("------------ LOG IN -----------------");
+            System.out.println("1. Ingresar al sistema");
+            System.out.println("2. Crear usuario");
+            System.out.println("3. Salir");
+            System.out.println("Seleccione una opcion: ");
+            opcion = scanner.nextInt();
 
             switch (opcion) {
                 case 1:
@@ -34,7 +35,7 @@ public class LogIn {
                         System.out.println("Bienvenido, " + clienteAsociado.getNombreCompleto());
                         boolean continuar = true;
                         while (continuar) {
-                            System.out.println("\n -------------- Opciones -----------------");
+                            System.out.println(" -------------- Opciones -----------------");
                             System.out.println("1. Ver informacion personal. ");
                             System.out.println("2. Realizar una accion");
                             System.out.println("3. Salir");
@@ -66,7 +67,7 @@ public class LogIn {
                         System.out.println("Bienvenido, " + gestorAsociado.getNombreCompleto());
                         boolean continuar = true;
                         while (continuar) {
-                            System.out.println("\n -------------- Opciones -----------------");
+                            System.out.println(" -------------- Opciones -----------------");
                             System.out.println("1. Ver informacion personal. ");
                             System.out.println("2. Realizar una accion");
                             System.out.println("3. Salir");
@@ -99,7 +100,7 @@ public class LogIn {
                         System.out.println("Bienvenido, " + mensajeroAsociado.getNombreCompleto());
                         boolean continuar = true;
                         while (continuar) {
-                            System.out.println("\n -------------- Opciones -----------------");
+                            System.out.println(" -------------- Opciones -----------------");
                             System.out.println("1. Ver informacion personal. ");
                             System.out.println("2. Realizar una accion");
                             System.out.println("3. Salir");
@@ -143,7 +144,7 @@ public class LogIn {
                         manejocliente.IngresarCliente(cliente);
                         ClienteUsuario clienteUsuario = new ClienteUsuario(cliente, username, password);
                         manejoUsuarios.AgregarUsuario(clienteUsuario);
-                       break; 
+                        break;
                     } else if (tipoCuenta.equalsIgnoreCase("Mensajero")) {
                         ManejoMensajero manejoMensajero = new ManejoMensajero();
                         Mensajero mensajero = manejoMensajero.crearMensajero();
@@ -158,7 +159,7 @@ public class LogIn {
                         GestorUsuario gestorUsuario = new GestorUsuario(gestor, username, password);
                         manejoUsuarios.AgregarUsuario(gestorUsuario);
                         break;
-                    } else{
+                    } else {
                         System.out.println("Opcion no valida");
                     }
                     break;
@@ -166,7 +167,6 @@ public class LogIn {
                     System.out.println("Saliendo");
                     break;
             }
-            
 
         } while (opcion != 3);
     }
