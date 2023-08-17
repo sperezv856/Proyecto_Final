@@ -10,9 +10,6 @@ public class Proyecto_Final11 {
         LogIn logIn = new LogIn();
         logIn.IniciarDatos();
         logIn.LogIn();
-        /*Menus menus = Menus.getInstance();
-        menus.IniciarDatos();
-        menus.EscogerOpcionPrincipal();*/
     }
 
 }
