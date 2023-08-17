@@ -1,5 +1,6 @@
 package proyecto_final1;
 
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -8,8 +9,31 @@ import java.util.Scanner;
  */
 public class LogIn {
 
+    private TipoProducto producto;
+    private Cliente cliente;
+    private Servicio servicio;
+    private DetalleServicio detalle;
+    private Date fechaServicio = null;
+    private String observaciones = null, instrucciones = null, estado = null;
+    private int IdServicio = 0, idGuia = 0, monto = 0;
+    ManejoProductos manejoProductos = new ManejoProductos();
+    ManejoCliente manejoCliente = new ManejoCliente();
+    ManejoGuia manejoGuia = new ManejoGuia(30);
+    ManejoJustificaciones manejoJustificaciones = new ManejoJustificaciones(15);
+    ManejoRutas manejoRutas = new ManejoRutas();
+
+    public void IniciarDatos() {
+        manejoCliente.IngresarDatosIniciales();
+        manejoProductos.IngresarDatosIniciales();
+    }
+
     public void LogIn() {
         ManejoUsuarios manejoUsuarios = new ManejoUsuarios();
+
+        Servicio servicio = new Servicio(fechaServicio, observaciones, instrucciones, IdServicio);
+        DetalleServicio detalle = new DetalleServicio(idGuia, monto, observaciones, estado);
+        Guia guia = new Guia(cliente, servicio, detalle, producto);
+
         int opcion = 0;
         Scanner scanner = new Scanner(System.in);
 
@@ -37,12 +61,15 @@ public class LogIn {
                         while (continuar) {
                             System.out.println(" -------------- Opciones -----------------");
                             System.out.println("1. Ver informacion personal. ");
-                            System.out.println("2. Realizar una accion");
-                            System.out.println("3. Salir");
+                            System.out.println("2. Ver lista de productos. ");
+                            System.out.println("3. Crear un servicio");
+                            System.out.println("4. Buscar/ Ver estado del servicio");
+                            System.out.println("5. Modificar datos personales");
+                            System.out.println("6. Salir");
                             System.out.println("Seleccione una opcion: ");
-                            int opcion2 = scanner.nextInt();
+                            opcion = scanner.nextInt();
 
-                            switch (opcion2) {
+                            switch (opcion) {
                                 case 1:
                                     System.out.println("-----------Informacion Personal---------------");
                                     System.out.println("Nombre completo: " + clienteAsociado.getNombreCompleto());
@@ -52,9 +79,28 @@ public class LogIn {
                                     System.out.println("Estado: " + clienteAsociado.getEstado());
                                     break;
                                 case 2:
-
+                                    manejoProductos.MostrarProductos();
                                     break;
                                 case 3:
+                                    if (manejoGuia.isEstadoServicio()) {
+                                        System.out.println("Opcion deshabilitada.");
+                                    } else {
+                                        guia = guia.CrearGuia(clienteAutenticado.getCliente(), servicio, detalle, manejoProductos);
+                                        manejoGuia.push(guia);
+                                    }
+                                    break;
+                                case 4:
+                                    System.out.println("Ingrese el numero de Guia a buscar: ");
+                                    int idGuia = scanner.nextInt();
+                                    manejoGuia.BuscarPilaGuia(idGuia);
+                                    manejoGuia.RevisarDetalle();
+                                    break;
+                                case 5:
+                                    int ced = clienteAutenticado.getCliente().getCedula();
+                                    manejoCliente.ModificarCliente(ced);
+                                    break;
+                                case 6:
+                                    System.out.println("Regresando");
                                     continuar = false;
 
                                     break;
@@ -69,12 +115,31 @@ public class LogIn {
                         while (continuar) {
                             System.out.println(" -------------- Opciones -----------------");
                             System.out.println("1. Ver informacion personal. ");
-                            System.out.println("2. Realizar una accion");
-                            System.out.println("3. Salir");
+                            System.out.println("2. Buscar cliente");
+                            System.out.println("3. Eliminar cliente");
+                            System.out.println("4. Modificar cliente");
+                            System.out.println("5. Mostrar lista de clientes");
+                            System.out.println("6. Ingresar producto");
+                            System.out.println("7. Buscar producto");
+                            System.out.println("8. Eliminar producto");
+                            System.out.println("9. Modificar producto");
+                            System.out.println("10. Mostrar lista de productos");
+                            System.out.println("11. Eliminar Guia");
+                            System.out.println("12. Mostrar las guias");
+                            System.out.println("13. Buscar Guia");
+                            System.out.println("14. Ingresar una ruta");
+                            System.out.println("15. Buscar una ruta");
+                            System.out.println("16. Eliminar una ruta");
+                            System.out.println("17. Modificar una ruta");
+                            System.out.println("18. Mostrar las rutas");
+                            System.out.println("19. Mostrar la cantidad de guias y justificaciones");
+                            System.out.println("20. Bloquear el ingreso de guias nuevas");
+                            System.out.println("21. Limpiar el sistema");
+                            System.out.println("22. Salir");
                             System.out.println("Seleccione una opcion: ");
-                            int opcion3 = scanner.nextInt();
+                            opcion = scanner.nextInt();
 
-                            switch (opcion3) {
+                            switch (opcion) {
                                 case 1:
                                     System.out.println("-----------Informacion Personal---------------");
                                     System.out.println("Nombre completo: " + gestorAsociado.getNombreCompleto());
@@ -84,9 +149,91 @@ public class LogIn {
                                     System.out.println("Estado: " + gestorAsociado.getEstado());
                                     break;
                                 case 2:
-
+                                    System.out.println("Ingrese el numero de cedula a buscar: ");
+                                    int ced = scanner.nextInt();
+                                    manejoCliente.buscarCliente(ced);
                                     break;
                                 case 3:
+                                    System.out.println("Ingrese el numero de cedula a eliminar: ");
+                                    ced = scanner.nextInt();
+                                    manejoCliente.EliminarCliente(ced);
+                                    break;
+                                case 4:
+                                    System.out.println("Ingrese el numero de cedula a modificar: ");
+                                    ced = scanner.nextInt();
+                                    manejoCliente.ModificarCliente(ced);
+                                    break;
+                                case 5:
+                                    manejoCliente.MostrarClientes();
+                                    break;
+                                case 6:
+                                    TipoProducto producto = manejoProductos.crearProducto();
+                                    manejoProductos.IngresarProducto(producto);
+                                    break;
+                                case 7:
+                                    System.out.println("Ingrese el numero de id a buscar: ");
+                                    int cdp = scanner.nextInt();
+                                    manejoProductos.buscarProducto(cdp);
+                                    break;
+                                case 8:
+                                    System.out.println("Ingrese el numero de id a eliminar: ");
+                                    cdp = scanner.nextInt();
+                                    manejoProductos.EliminarProducto(cdp);
+                                    break;
+                                case 9:
+                                    System.out.println("Ingrese el numero de id a modificar: ");
+                                    cdp = scanner.nextInt();
+                                    manejoProductos.ModificarProducto(cdp);
+                                    break;
+                                case 10:
+                                    manejoProductos.MostrarProductos();
+                                    break;
+                                case 11:
+                                    manejoGuia.popGuia();
+                                    break;
+                                case 12:
+                                    manejoGuia.MostrarPilaGuia();
+                                    break;
+                                case 13:
+                                    System.out.println("Ingrese el numero de Guia a buscar: ");
+                                    int idGuia = scanner.nextInt();
+                                    manejoGuia.BuscarPilaGuia(idGuia);
+                                    break;
+                                case 14:
+                                    Ruta ruta = manejoRutas.crearRuta();
+                                    manejoRutas.IngresarRuta(ruta);
+                                    break;
+                                case 15:
+                                    System.out.println("Ingrese el nombre de ruta a buscar: ");
+                                    String rutn = scanner.nextLine();
+                                    manejoRutas.BuscarRuta(rutn);
+                                    break;
+                                case 16:
+                                    System.out.println("Ingrese el nombre de ruta a eliminar: ");
+                                    rutn = scanner.nextLine();
+                                    manejoRutas.EliminarRuta(rutn);
+                                    break;
+                                case 17:
+                                    System.out.println("Ingrese el numero de Ruta a modificar: ");
+                                    rutn = scanner.nextLine();
+                                    manejoRutas.ModificarRuta(rutn);
+                                    break;
+                                case 18:
+                                    manejoRutas.MostrarRuta();
+                                    break;
+                                case 19:
+                                    manejoGuia.mostrarCantElementos();
+                                    manejoJustificaciones.mostrarCantElementos();
+                                    break;
+                                case 20:
+                                    manejoGuia.estadoServicio();
+                                    break;
+                                case 21:
+                                    manejoGuia.LimpiarGuia();
+                                    manejoJustificaciones.LimpiarJustificaciones();
+                                    break;
+                                case 22:
+                                    System.out.println("Regresando");
                                     continuar = false;
 
                                     break;
@@ -105,9 +252,9 @@ public class LogIn {
                             System.out.println("2. Realizar una accion");
                             System.out.println("3. Salir");
                             System.out.println("Seleccione una opcion: ");
-                            int opcion4 = scanner.nextInt();
+                            opcion = scanner.nextInt();
 
-                            switch (opcion4) {
+                            switch (opcion) {
                                 case 1:
                                     System.out.println("-----------Informacion Personal---------------");
                                     System.out.println("Nombre completo: " + mensajeroAsociado.getNombreCompleto());

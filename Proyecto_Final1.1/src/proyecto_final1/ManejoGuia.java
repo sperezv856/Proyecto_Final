@@ -157,6 +157,7 @@ public class ManejoGuia {
         while (!pilaVacia()) {            
             popGuia();
         }
+        System.out.println("Servicios eliminados");
     }
     public void RevisarDetalle (){
         System.out.println("Ingrese el numero de servicio a revisar: ");

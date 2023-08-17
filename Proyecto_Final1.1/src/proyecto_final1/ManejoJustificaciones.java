@@ -138,6 +138,7 @@ public class ManejoJustificaciones {
         while (!pilaVacia()) {            
             popJustificaciones();
         }
+        System.out.println("Justificaciones eliminadas");
     }
 
 }

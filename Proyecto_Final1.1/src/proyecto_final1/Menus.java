@@ -192,8 +192,8 @@ public class Menus {
                     if (manejoGuia.isEstadoServicio()) {
                         System.out.println("Opcion deshabilitada.");
                     } else {
-                        guia = guia.CrearGuia(manejoCliente, servicio, detalle, manejoProductos);
-                        manejoGuia.push(guia);
+                        /*guia = guia.CrearGuia(manejoCliente, servicio, detalle, manejoProductos);
+                        manejoGuia.push(guia);*/
                     }
 
                     break;

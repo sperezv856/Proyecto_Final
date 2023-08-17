@@ -48,8 +48,6 @@ public class ManejoProductos {
         ultimo = null;
     }
 
-  
-
     public TipoProducto crearProducto() {
         System.out.println("Indique el ID del producto: ");
         int id = scanner.nextInt();
@@ -68,7 +66,8 @@ public class ManejoProductos {
         producto.setEstado(estado);
         return producto;
     }
-      // Metodo para el ingreso de un nuevo objeto TipoProducto
+    // Metodo para el ingreso de un nuevo objeto TipoProducto
+
     public void IngresarProducto(TipoProducto producto) {
         NodoListaSimple nodoNuevo = new NodoListaSimple();
         nodoNuevo.setProducto(producto);
@@ -127,22 +126,49 @@ public class ManejoProductos {
         NodoListaSimple actual = getPrimero();
         while (actual != null) {
             if (actual.getProducto().getIdTipoProducto() == cdp) {
-                System.out.println("Ingrese el nuevo ID del producto: ");
-                int nuevoID = scanner.nextInt();
-                actual.getProducto().setIdTipoProducto(nuevoID);
-                System.out.println("Ingrese las nuevas observaciones: ");
-                String nuevaObservacion = scanner.nextLine();
-                actual.getProducto().setObservaciones(nuevaObservacion);
-                System.out.println("Ingrese el nuevo Monto: ");
-                int nuevoMonto = scanner.nextInt();
-                actual.getProducto().setMonto(nuevoMonto);
-                String nuevoEstado = scanner.nextLine();
-                actual.getProducto().setEstado(nuevoEstado);
+                boolean continuar = true;
+                while (continuar) {
+                    System.out.println(" -------------- Opciones -----------------");
+                    System.out.println("1. Modificar el ID del producto. ");
+                    System.out.println("2. Modificar las observaciones. ");
+                    System.out.println("3. Modificar el Monto");
+                    System.out.println("4. Modificar el Estado");
+                    System.out.println("5. Salir");
+                    System.out.println("Seleccione una opcion: ");
+                    int opcion = scanner.nextInt();
+                    switch (opcion) {
+                        case 1:
+                            System.out.println("Ingrese el nuevo ID del producto: ");
+                            int nuevoID = scanner.nextInt();
+                            actual.getProducto().setIdTipoProducto(nuevoID);
+                            break;
+                        case 2:
+                            System.out.println("Ingrese las nuevas observaciones: ");
+                            String nuevaObservacion = scanner.nextLine();
+                            actual.getProducto().setObservaciones(nuevaObservacion);
+                            break;
+                        case 3:
+                            System.out.println("Ingrese el nuevo Monto: ");
+                            int nuevoMonto = scanner.nextInt();
+                            actual.getProducto().setMonto(nuevoMonto);
+                            break;
+                        case 4:
+                            String nuevoEstado = scanner.nextLine();
+                            actual.getProducto().setEstado(nuevoEstado);
+                            System.out.println("Producto modificado correctamente");
+                            break;
+                        case 5:
+                            System.out.println("Finalizando los cambios");
+                            continuar = false;
+                            break;
+                    }
+                }
                 System.out.println("Producto modificado correctamente");
+            
             }
             actual = actual.getSiguiente();
         }
-        System.out.println("Ruta no encontrada");
+        System.out.println("Producto no encontrado");
     }
 
     public void MostrarProductos() {
@@ -156,13 +182,14 @@ public class ManejoProductos {
         }
 
     }
-    public void IngresarDatosIniciales (){
+
+    public void IngresarDatosIniciales() {
         TipoProducto producto1 = new TipoProducto(001, 35000, "Tennis Puma", "Activo");
         IngresarProducto(producto1);
         TipoProducto producto2 = new TipoProducto(002, 55000, "Gameboy", "Activo");
         IngresarProducto(producto2);
         TipoProducto producto3 = new TipoProducto(003, 150000, "Monitor LCD", "Activo");
         IngresarProducto(producto3);
-        
+
     }
 }

@@ -68,8 +68,8 @@ public class Guia {
     /*En el siguiente metodo se pretende crear una guia completa con todos los
     componentes necesarios, Cliente, Servicio, Detalle de servicio y Producto. 
     Por esta razon debemos generar un objeto Guia con todos los objetos mencionados*/
-     public Guia CrearGuia(ManejoCliente manejoCliente, Servicio servicio, DetalleServicio detalle, ManejoProductos manejoProductos) {
-        Cliente cliente = buscarCliente(manejoCliente);
+     public Guia CrearGuia(Cliente cliente, Servicio servicio, DetalleServicio detalle, ManejoProductos manejoProductos) {
+        cliente = getCliente();
         servicio = servicio.crearServicio();
         detalle = detalle.crearDetalle();
         TipoProducto producto = buscarProducto(manejoProductos);
