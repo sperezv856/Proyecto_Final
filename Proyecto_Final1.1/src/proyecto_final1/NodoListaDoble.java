@@ -6,19 +6,19 @@ package proyecto_final1;
  */
 //Clase para crear los nodos de la lista Doble, con Getter y Setter
 public class NodoListaDoble {
-    private Gestor gestor;
+    private Guia guia;
     private NodoListaDoble siguiente;
     private NodoListaDoble anterior;
 
     public NodoListaDoble() {
     }
 
-    public Gestor getGestor() {
-        return gestor;
+    public Guia getGuia() {
+        return guia;
     }
 
-    public void setGestor(Gestor gestor) {
-        this.gestor = gestor;
+    public void setGuia(Guia guia) {
+        this.guia = guia;
     }
 
     public NodoListaDoble getSiguiente() {

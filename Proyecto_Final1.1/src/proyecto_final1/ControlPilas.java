@@ -19,7 +19,7 @@ public class ControlPilas {
             resultado = "El numero de guia se encontro en la pila de Guias";
             return resultado;
         }
-        ObjetoJustificaciones justificacionEncontrada = justificacion.BuscarJustificaciones(numeroGuia);
+        Justificaciones justificacionEncontrada = justificacion.BuscarJustificaciones(numeroGuia);
         if (justificacionEncontrada != null) {
             resultado = "El numero de guia se encontro en la pila de Justificaciones";
             return resultado;

@@ -1,5 +1,8 @@
 package proyecto_final1;
 
+import java.util.Date;
+import java.util.Scanner;
+
 /**
  *
  * @author Susana Vargas López
@@ -7,19 +10,20 @@ package proyecto_final1;
 /*ManejoGuia es una clase que ejecuta todas las funciones o metodos correspondientes
 a el manejo de la Pila de Justificaciones. Se incluye constructor, Getter y setter*/
 public class ManejoJustificaciones {
-    private ObjetoJustificaciones vectorPila [];
+    Scanner scanner = new Scanner(System.in);
+    private Justificaciones vectorPila [];
     private int cima;
     
     public ManejoJustificaciones(int tamano){
-        vectorPila = new ObjetoJustificaciones[tamano];
+        vectorPila = new Justificaciones[tamano];
         cima =0;
     }
 
-    public ObjetoJustificaciones[] getVectorPila() {
+    public Justificaciones[] getVectorPila() {
         return vectorPila;
     }
 
-    public void setVectorPila(ObjetoJustificaciones[] vectorPila) {
+    public void setVectorPila(Justificaciones[] vectorPila) {
         this.vectorPila = vectorPila;
     }
 
@@ -47,8 +51,21 @@ public class ManejoJustificaciones {
             return false;
         }
     }
-    /*Este metodo hace el push del objeto ObjetoJustificaciones completo a la pila */
-    public void push (ObjetoJustificaciones justificacion){
+    public Justificaciones crearJustificacion(){
+        System.out.println("Indique el numero de id:");
+        int idJustificacion = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Ingrese las observaciones:");
+        String observaciones = scanner.nextLine();
+        Date fecha = new Date();
+        Justificaciones justificaciones = new Justificaciones(idJustificacion, observaciones, fecha);
+        justificaciones.setIdJustificacion(idJustificacion);
+        justificaciones.setObservaciones(observaciones);
+        justificaciones.setFecha(fecha);
+        return justificaciones;
+    }
+    /*Este metodo hace el push del objeto Justificaciones completo a la pila */
+    public void push (Justificaciones justificacion){
         if (pilaLlena(tamano())== false) {
             vectorPila[getCima()] = justificacion;
             setCima(getCima()+1);
@@ -56,9 +73,9 @@ public class ManejoJustificaciones {
             System.out.println("La pila esta llena. ");
         }
     }
-    /*Este metodo hace el pop del objeto ObjetoJustificaciones completo a la pila */
-    public ObjetoJustificaciones popJustificaciones (){
-        ObjetoJustificaciones eliminar = null;
+    /*Este metodo hace el pop del objeto Justificaciones completo a la pila */
+    public Justificaciones popJustificaciones (){
+        Justificaciones eliminar = null;
         if (getCima()==0) {
             System.out.println("La pila esta vacia. ");
         } else {
@@ -69,8 +86,8 @@ public class ManejoJustificaciones {
     }
     /*Este metodo muestra la pila completa de ObjetoJustificaciones sin perder los valores de la
     pila original*/
-    public void MostrarPilaObjetoJustificaciones (ObjetoJustificaciones justificacion){
-        ObjetoJustificaciones aux = null;
+    public void MostrarPilaObjetoJustificaciones (Justificaciones justificacion){
+        Justificaciones aux = null;
         ManejoJustificaciones pilaBackup = new ManejoJustificaciones(tamano());
         while (pilaVacia() == false) {            
             aux = popJustificaciones();
@@ -86,17 +103,17 @@ public class ManejoJustificaciones {
     }
     /*Este metodo busca en la pila completa de Justificaciones por medio del idJustificacion
     sin perder los valores de la pila original*/
-    public ObjetoJustificaciones BuscarJustificaciones(int idJustificacion){
+    public Justificaciones BuscarJustificaciones(int idJustificacion){
         int cont = 0;
-        ObjetoJustificaciones aux = null;
-        ObjetoJustificaciones justificacionEncontrada = null;
+        Justificaciones aux = null;
+        Justificaciones justificacionEncontrada = null;
         ManejoJustificaciones pilaBackup = new ManejoJustificaciones(tamano());
         while (pilaVacia() == false) {            
             aux = popJustificaciones();
             cont ++;
-            if (aux.getJustificaciones().getIdJustificacion() == idJustificacion) {
+            if (aux.getIdJustificacion() == idJustificacion) {
                 justificacionEncontrada = aux;
-                System.out.println("Se encontro la justificacion solicitada en la posicion # "+ cont+" Fue ingresada el: "+aux.getJustificaciones().getFecha().toString());
+                System.out.println("Se encontro la justificacion solicitada en la posicion # "+ cont+" Fue ingresada el: "+aux.getFecha().toString());
             }
             if (pilaBackup.pilaLlena(tamano())== false) {
                 pilaBackup.push(aux);
@@ -117,7 +134,7 @@ public class ManejoJustificaciones {
     pero a la hora de regresarlos hace pop de los 10 primeros y regresa solo los ultimos 5*/
     public void recolector(){
         if (pilaLlena(tamano())== true) {
-            ObjetoJustificaciones aux = null;
+            Justificaciones aux = null;
             ManejoJustificaciones pilaBackup = new ManejoJustificaciones(tamano());
             while (pilaVacia() == false) {                
                 aux = popJustificaciones();

@@ -13,6 +13,8 @@ public class LogIn {
     private Cliente cliente;
     private Servicio servicio;
     private DetalleServicio detalle;
+    private Guia guia;
+    private Justificaciones justificaciones;
     private Date fechaServicio = null;
     private String observaciones = null, instrucciones = null, estado = null;
     private int IdServicio = 0, idGuia = 0, monto = 0;
@@ -21,6 +23,9 @@ public class LogIn {
     ManejoGuia manejoGuia = new ManejoGuia(30);
     ManejoJustificaciones manejoJustificaciones = new ManejoJustificaciones(15);
     ManejoRutas manejoRutas = new ManejoRutas();
+    ManejoArbol manejoArbol = new ManejoArbol();
+    Priorizar priorizar = new Priorizar();
+    ObjetoJustificaciones objetoJustificaciones = new ObjetoJustificaciones(guia, justificaciones);
 
     public void IniciarDatos() {
         manejoCliente.IngresarDatosIniciales();
@@ -127,15 +132,23 @@ public class LogIn {
                             System.out.println("11. Eliminar Guia");
                             System.out.println("12. Mostrar las guias");
                             System.out.println("13. Buscar Guia");
-                            System.out.println("14. Ingresar una ruta");
-                            System.out.println("15. Buscar una ruta");
-                            System.out.println("16. Eliminar una ruta");
-                            System.out.println("17. Modificar una ruta");
-                            System.out.println("18. Mostrar las rutas");
-                            System.out.println("19. Mostrar la cantidad de guias y justificaciones");
-                            System.out.println("20. Bloquear el ingreso de guias nuevas");
-                            System.out.println("21. Limpiar el sistema");
-                            System.out.println("22. Salir");
+                            System.out.println("14. Priorizar Guia");
+                            System.out.println("15. Ingresar una ruta");
+                            System.out.println("16. Buscar una ruta");
+                            System.out.println("17. Eliminar una ruta");
+                            System.out.println("18. Modificar una ruta");
+                            System.out.println("19. Mostrar las rutas");
+                            System.out.println("20. Crear justificaciones");
+                            System.out.println("21. Eliminar justificaciones");
+                            System.out.println("22. Mostrar las justificaciones");
+                            System.out.println("23. Buscar justificaciones");
+                            System.out.println("24. Mostrar los servicios eliminados");
+                            System.out.println("25. Eliminar servicios");
+                            System.out.println("26. Mostrar los servicios priorizados");
+                            System.out.println("27. Mostrar la cantidad de guias y justificaciones");
+                            System.out.println("28. Bloquear el ingreso de guias nuevas");
+                            System.out.println("29. Limpiar el sistema");
+                            System.out.println("30. Salir");
                             System.out.println("Seleccione una opcion: ");
                             opcion = scanner.nextInt();
 
@@ -200,39 +213,100 @@ public class LogIn {
                                     manejoGuia.BuscarPilaGuia(idGuia);
                                     break;
                                 case 14:
+                                    guia = manejoGuia.popGuia();
+                                    System.out.println("Guia: " + guia.toString());
+                                    continuar = true;
+                                    while (continuar) {
+                                        System.out.println(" -------------- Opciones -----------------");
+                                        System.out.println("1. Poner en prioridad. ");
+                                        System.out.println("2. Bajar la prioridad. ");
+                                        System.out.println("3. Salir");
+                                        System.out.println("Seleccione una opcion: ");
+                                        opcion = scanner.nextInt();
+                                        switch (opcion) {
+                                            case 1:
+                                                priorizar.ingresarAlInicio(guia);
+                                                guia.getDetalle().setEstado("En transito");
+                                                break;
+                                            case 2:
+                                                priorizar.ingresarAlFinal(guia);
+                                                guia.getDetalle().setEstado("En transito");
+                                                break;
+                                            case 3:
+                                                System.out.println("Regresando");
+                                                continuar = false;
+                                        }
+                                    }
+                                    break;
+
+                                case 15:
                                     Ruta ruta = manejoRutas.crearRuta();
                                     manejoRutas.IngresarRuta(ruta);
                                     break;
-                                case 15:
+                                case 16:
                                     System.out.println("Ingrese el nombre de ruta a buscar: ");
                                     String rutn = scanner.nextLine();
                                     manejoRutas.BuscarRuta(rutn);
                                     break;
-                                case 16:
+                                case 17:
                                     System.out.println("Ingrese el nombre de ruta a eliminar: ");
                                     rutn = scanner.nextLine();
                                     manejoRutas.EliminarRuta(rutn);
                                     break;
-                                case 17:
+                                case 18:
                                     System.out.println("Ingrese el numero de Ruta a modificar: ");
                                     rutn = scanner.nextLine();
                                     manejoRutas.ModificarRuta(rutn);
                                     break;
-                                case 18:
+                                case 19:
                                     manejoRutas.MostrarRuta();
                                     break;
-                                case 19:
+                                case 20:
+                                    manejoJustificaciones.crearJustificacion();
+                                    manejoJustificaciones.push(justificaciones);
+                                    manejoJustificaciones.recolector();
+                                    break;
+                                case 21:
+                                    manejoJustificaciones.popJustificaciones();
+                                    break;
+                                case 22:
+                                    manejoJustificaciones.MostrarPilaObjetoJustificaciones(justificaciones);
+                                    break;
+                                case 23:
+                                    System.out.println("Ingrese el numero de Id de la justificacion a buscar: ");
+                                    int idJustificacion = scanner.nextInt();
+                                    manejoJustificaciones.BuscarJustificaciones(idJustificacion);
+                                    break;
+                                case 24:
+                                    System.out.println("Servicios eliminados:");
+                                    manejoArbol.MostrarEnOrden(manejoArbol.getRaiz());
+                                    break;
+                                case 25:
+                                    System.out.println("Ingrese el id de la guia a eliminar: ");
+                                    idGuia = scanner.nextInt();
+                                    Guia guiaEliminada=priorizar.eliminarPorId(idGuia);
+                                    if (guiaEliminada != null) {
+                                        objetoJustificaciones.CrearEntrada(guiaEliminada);
+                                        manejoArbol.insertar(objetoJustificaciones);
+                                    } else {
+                                        System.out.println("No se ha eliminado la guia");
+                                    }
+                                    break;
+                                case 26:
+                                    priorizar.mostrarElementosPriorizados();
+                                    break;
+                                case 27:
                                     manejoGuia.mostrarCantElementos();
                                     manejoJustificaciones.mostrarCantElementos();
                                     break;
-                                case 20:
+                                case 28:
                                     manejoGuia.estadoServicio();
                                     break;
-                                case 21:
+                                case 29:
                                     manejoGuia.LimpiarGuia();
                                     manejoJustificaciones.LimpiarJustificaciones();
                                     break;
-                                case 22:
+                                case 30:
                                     System.out.println("Regresando");
                                     continuar = false;
 
@@ -278,6 +352,7 @@ public class LogIn {
                         System.out.println("Usuario no registrado.");
                     }
                     break;
+
                 case 2:
                     System.out.println("Que tipo de cuenta desea crear? (Cliente, Gestor, Mensajero): ");
                     String tipoCuenta = scanner.next();
