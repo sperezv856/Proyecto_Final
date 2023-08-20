@@ -16,7 +16,7 @@ public class Guia {
     private Servicio servicio;
     private DetalleServicio detalle;
     private TipoProducto producto;
-    private Ruta ubicacionPaquete;
+    private Ruta ubicacionPaquete; // Revisar si esto funciona aqui
 
     public Guia(Cliente cliente, Servicio servicio, DetalleServicio detalle, TipoProducto producto) {
         this.cliente = cliente;
@@ -71,8 +71,9 @@ public class Guia {
      public Guia CrearGuia(Cliente cliente, Servicio servicio, DetalleServicio detalle, ManejoProductos manejoProductos) {
         cliente = getCliente();
         servicio = servicio.crearServicio();
-        detalle = detalle.crearDetalle();
         TipoProducto producto = buscarProducto(manejoProductos);
+        detalle = detalle.crearDetalle();
+        
 
         Guia guia = new Guia(cliente, servicio, detalle, producto);
         return guia;
