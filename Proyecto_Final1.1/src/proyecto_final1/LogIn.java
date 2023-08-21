@@ -29,6 +29,7 @@ public class LogIn {
     ManejoJustificaciones manejoJustificaciones = new ManejoJustificaciones(15);
     ManejoRutas manejoRutas = new ManejoRutas();
     ManejoArbol manejoArbol = new ManejoArbol();
+    ManejoUsuarios manejoUsuarios = new ManejoUsuarios();
     Priorizar priorizar = new Priorizar();
     ObjetoJustificaciones objetoJustificaciones = new ObjetoJustificaciones(objetoGestor, justificaciones);
     ClienteUsuario clienteUsuario = new ClienteUsuario(cliente, userName, password);
@@ -38,6 +39,7 @@ public class LogIn {
      public void IniciarDatos() {
         manejoCliente.IngresarDatosIniciales();
         manejoProductos.IngresarDatosIniciales();
+        IngresarDatosIniciales();
     }
 
     public void LogIn() {
@@ -280,8 +282,8 @@ public class LogIn {
                                     manejoRutas.MostrarRuta();
                                     break;
                                 case 20:
-                                    manejoJustificaciones.crearJustificacion();
-                                    manejoJustificaciones.push(justificaciones);
+                                    Justificaciones justificacion = manejoJustificaciones.crearJustificacion(justificaciones);
+                                    manejoJustificaciones.push(justificacion);
                                     manejoJustificaciones.recolector();
                                     break;
                                 case 21:
@@ -411,5 +413,16 @@ public class LogIn {
             }
 
         } while (opcion != 3);
+    }
+    public void IngresarDatosIniciales(){
+        Cliente cliente1 = new Cliente("jose.p.munoz85@gmail.com", "San Juan, Tibas", 87026720, 112350023, "Jose Pablo Munoz", "Activo");
+        Usuario usuario1 = new ClienteUsuario(cliente1, "jopamu", "Metal112");
+        manejoUsuarios.AgregarUsuario(usuario1);
+        Gestor gestor1 = new Gestor("Administrador", "Gerente", 12345424, "Rolando Vega", "Activo");
+        Usuario usuario2 = new GestorUsuario(gestor1, "admin", "admin123");
+        manejoUsuarios.AgregarUsuario(usuario2);
+        Mensajero mensajero1 = new Mensajero(1, "Costarricense", 78141231, 154121421, "Julian Delgado","Activo");
+        Usuario usuario3 = new MensajeroUsuario(mensajero1, "judelga", "456");
+        manejoUsuarios.AgregarUsuario(usuario3);
     }
 }

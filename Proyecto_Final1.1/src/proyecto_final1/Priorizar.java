@@ -143,15 +143,16 @@ public class Priorizar {
             actual = actual.getSiguiente();
         }
     }
-    public void mostrarRuta(int idGuia){
-        NodoListaDoble actual =getPrimero();
-        while (actual != null) {            
+
+    public void mostrarRuta(int idGuia) {
+        NodoListaDoble actual = getPrimero();
+        while (actual != null) {
             if (actual.getObjetoGestor().getGuia().getDetalle().getIdGuia() == idGuia) {
                 Ruta ruta = actual.getObjetoGestor().getRuta();
                 if (ruta != null) {
-                    System.out.println(" IdGuia"+ idGuia);
-                    System.out.println("Nombre de ruta: "+ruta.getRutaNombre()+ " Provincia: "+ ruta.getProvincia()
-                    + " Canton: "+ ruta.getCanton());
+                    System.out.println(" IdGuia" + idGuia);
+                    System.out.println("Nombre de ruta: " + ruta.getRutaNombre() + " Provincia: " + ruta.getProvincia()
+                            + " Canton: " + ruta.getCanton());
                 } else {
                     System.out.println("No se encontro la ruta para la Guia solicitada");
                 }
@@ -159,5 +160,35 @@ public class Priorizar {
             }
             actual = actual.getSiguiente();
         }
+    }
+
+    public void ordenarPorNombreDeRuta() {
+        NodoListaDoble actual, siguiente;
+        boolean intercambio;
+
+        do {
+            actual = getPrimero();
+            intercambio = false;
+
+            while (actual != null && actual.getSiguiente() != null) {
+                siguiente = actual.getSiguiente();
+
+                if (actual.getObjetoGestor().getRuta()!= null
+                        && siguiente.getObjetoGestor().getRuta() != null
+                        && actual.getObjetoGestor().getRuta().getRutaNombre().compareTo(siguiente.getObjetoGestor().getRuta().getRutaNombre()) > 0) {
+
+                    intercambiar(actual, siguiente);
+                    intercambio = true;
+                }
+
+                actual = siguiente;
+            }
+        } while (intercambio);
+    }
+
+    private void intercambiar(NodoListaDoble nodo1, NodoListaDoble nodo2) {
+        ObjetoGestor aux = nodo1.getObjetoGestor();
+        nodo1.setObjetoGestor(nodo2.getObjetoGestor());
+        nodo2.setObjetoGestor(aux);
     }
 }

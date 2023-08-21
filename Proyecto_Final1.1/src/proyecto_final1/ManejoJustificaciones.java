@@ -51,14 +51,14 @@ public class ManejoJustificaciones {
             return false;
         }
     }
-    public Justificaciones crearJustificacion(){
+    public Justificaciones crearJustificacion(Justificaciones justificaciones){
         System.out.println("Indique el numero de id:");
         int idJustificacion = scanner.nextInt();
         scanner.nextLine();
         System.out.println("Ingrese las observaciones:");
         String observaciones = scanner.nextLine();
         Date fecha = new Date();
-        Justificaciones justificaciones = new Justificaciones(idJustificacion, observaciones, fecha);
+        justificaciones = new Justificaciones(idJustificacion, observaciones, fecha);
         justificaciones.setIdJustificacion(idJustificacion);
         justificaciones.setObservaciones(observaciones);
         justificaciones.setFecha(fecha);
