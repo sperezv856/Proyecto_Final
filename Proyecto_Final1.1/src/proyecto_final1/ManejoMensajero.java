@@ -86,11 +86,11 @@ public class ManejoMensajero {
         }
         
     }
-    public Mensajero buscarMensajero(int ced) {
+    public Mensajero buscarMensajero(int cod) {
         NodoListaSimple actual = new NodoListaSimple();
         actual = getPrimero();
         while (actual != null) {
-            if (actual.getMensajero().getCedula()== ced) {
+            if (actual.getMensajero().getCodigoMensajero()== cod) {
                 System.out.println("Mensajero Encontrado");
                 System.out.println("Cedula: " + actual.getMensajero().getCedula());
                 System.out.println("Nombre: " + actual.getMensajero().getNombreCompleto());

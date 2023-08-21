@@ -41,6 +41,8 @@ public class Cliente extends Persona{
         this.celular = celular;
     }
 
-
-    
+    @Override
+    public String toString() {
+        return "Cedula: "+ getCedula() + " Nombre completo: "+ getNombreCompleto() + " Email: "+ getEmail()+ " Telefono: "+ getCelular();
+    }
 }

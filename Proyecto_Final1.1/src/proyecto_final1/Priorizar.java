@@ -30,9 +30,9 @@ public class Priorizar {
         this.ultimo = ultimo;
     }
 
-    public void ingresarAlInicio(Guia guia) {
+    public void ingresarAlInicio(ObjetoGestor objetoGestor) {
         NodoListaDoble nodoNuevo = new NodoListaDoble();
-        nodoNuevo.setGuia(guia);
+        nodoNuevo.setObjetoGestor(objetoGestor);
         if (getPrimero() == null) {
             setPrimero(nodoNuevo);
             nodoNuevo.setSiguiente(null);
@@ -46,9 +46,9 @@ public class Priorizar {
         }
     }
 
-    public void ingresarAlFinal(Guia guia) {
+    public void ingresarAlFinal(ObjetoGestor objetoGestor) {
         NodoListaDoble nodoNuevo = new NodoListaDoble();
-        nodoNuevo.setGuia(guia);
+        nodoNuevo.setObjetoGestor(objetoGestor);
         if (getUltimo() == null) {
             setPrimero(nodoNuevo);
             nodoNuevo.setSiguiente(null);
@@ -62,10 +62,10 @@ public class Priorizar {
         }
     }
 
-    public void buscar(Guia guia) {
+    public void buscar(ObjetoGestor objetoGestor) {
         NodoListaDoble actual = getPrimero();
         while (actual != null) {
-            if (actual.getGuia() == guia) {
+            if (actual.getObjetoGestor() == objetoGestor) {
                 System.out.println("Guia encontrada");
                 return;
             }
@@ -74,12 +74,12 @@ public class Priorizar {
         System.out.println("Guia no encontrada");
     }
 
-    public Guia buscarPorId(int idGuia) {
+    public ObjetoGestor buscarPorId(int idGuia) {
         NodoListaDoble actual = getPrimero();
         while (actual != null) {
-            if (actual.getGuia().getDetalle().getIdGuia() == idGuia) {
+            if (actual.getObjetoGestor().getGuia().getDetalle().getIdGuia() == idGuia) {
                 System.out.println("Guia encontrada");
-                return actual.getGuia();
+                return actual.getObjetoGestor();
             }
             actual = actual.getSiguiente();
         }
@@ -87,11 +87,11 @@ public class Priorizar {
         return null;
     }
 
-    public void eliminar(Guia guia) {
+    public void eliminar(ObjetoGestor objetoGestor) {
         NodoListaDoble actual = getPrimero();
         NodoListaDoble anterior = null;
         while (actual != null) {
-            if (actual.getGuia() == guia) {
+            if (actual.getObjetoGestor() == objetoGestor) {
                 if (actual == getPrimero()) {
                     setPrimero(getPrimero().getSiguiente());
                 } else {
@@ -100,19 +100,19 @@ public class Priorizar {
                         actual.getSiguiente().setAnterior(anterior);
                     }
                 }
-                System.out.println("Guia eliminada");
+                System.out.println("Servicio eliminado");
                 return;
             }
-            System.out.println("Guia no encontrada");
+            System.out.println("Servicio no encontrado");
         }
 
     }
 
-    public Guia eliminarPorId(int idGuia) {
+    public ObjetoGestor eliminarPorId(int idGuia) {
         NodoListaDoble actual = getPrimero();
         NodoListaDoble anterior = null;
         while (actual != null) {
-            if (actual.getGuia().getDetalle().getIdGuia() == idGuia) {
+            if (actual.getObjetoGestor().getGuia().getDetalle().getIdGuia() == idGuia) {
                 if (actual == getPrimero()) {
                     setPrimero(getPrimero().getSiguiente());
                     if (getPrimero() != null) {
@@ -125,7 +125,7 @@ public class Priorizar {
                     }
                 }
                 System.out.println("Guia eliminada");
-                return actual.getGuia();
+                return actual.getObjetoGestor();
             }
             anterior = actual;
             actual = actual.getSiguiente();
@@ -138,8 +138,25 @@ public class Priorizar {
         System.out.println("Servicios priorizados:");
         NodoListaDoble actual = getPrimero();
         while (actual != null) {
-            System.out.println(actual.getGuia().toString());
+            System.out.println(actual.getObjetoGestor().toString());
             // Puedes mostrar más atributos de la guía según tus necesidades
+            actual = actual.getSiguiente();
+        }
+    }
+    public void mostrarRuta(int idGuia){
+        NodoListaDoble actual =getPrimero();
+        while (actual != null) {            
+            if (actual.getObjetoGestor().getGuia().getDetalle().getIdGuia() == idGuia) {
+                Ruta ruta = actual.getObjetoGestor().getRuta();
+                if (ruta != null) {
+                    System.out.println(" IdGuia"+ idGuia);
+                    System.out.println("Nombre de ruta: "+ruta.getRutaNombre()+ " Provincia: "+ ruta.getProvincia()
+                    + " Canton: "+ ruta.getCanton());
+                } else {
+                    System.out.println("No se encontro la ruta para la Guia solicitada");
+                }
+                return;
+            }
             actual = actual.getSiguiente();
         }
     }

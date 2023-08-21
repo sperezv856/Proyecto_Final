@@ -69,7 +69,7 @@ public class Guia {
     componentes necesarios, Cliente, Servicio, Detalle de servicio y Producto. 
     Por esta razon debemos generar un objeto Guia con todos los objetos mencionados*/
      public Guia CrearGuia(Cliente cliente, Servicio servicio, DetalleServicio detalle, ManejoProductos manejoProductos) {
-        cliente = getCliente();
+        //cliente = getCliente();
         servicio = servicio.crearServicio();
         TipoProducto producto = buscarProducto(manejoProductos);
         detalle = detalle.crearDetalle();

@@ -73,7 +73,7 @@ public class ManejoRutas {
     }
 
     //Metodo para buscar un objeto Ruta por medio del nombre de la ruta llamado rutn
-    public void BuscarRuta(String rutn) {
+    public Ruta BuscarRuta(String rutn) {
         NodoListaSimple actual = new NodoListaSimple();
         actual = getPrimero();
         while (actual != null) {
@@ -82,10 +82,13 @@ public class ManejoRutas {
                 System.out.println("Nombre de ruta: " + actual.getRuta().getRutaNombre());
                 System.out.println("Provincia: " + actual.getRuta().getProvincia());
                 System.out.println("Canton: " + actual.getRuta().getCanton());
+                
+                return actual.getRuta();
             }
             actual = actual.getSiguiente();
         }
         System.out.println("Ruta no encontrada");
+        return null;
     }
 
     //Metodo para eliminar un objeto Ruta por medio del nombre de la ruta llamado rutn

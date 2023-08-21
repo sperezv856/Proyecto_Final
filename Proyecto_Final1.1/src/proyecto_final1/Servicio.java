@@ -72,4 +72,10 @@ public class Servicio{
 
         return servicio;
     }
+
+    @Override
+    public String toString() {
+        return "Id de servicio: "+ getIdServicio()+ " Fecha de servicio: "+ getFechaServicio()+ " Observaciones: "+ getObservaciones() + " Instrucciones: "+ getInstrucciones();
+    }
+    
 }

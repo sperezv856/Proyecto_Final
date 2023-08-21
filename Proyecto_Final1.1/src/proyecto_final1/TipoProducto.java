@@ -49,5 +49,10 @@ public class TipoProducto {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Id del producto: "+ getIdTipoProducto()+" Observaciones: "+getObservaciones()+" Monto: "+getMonto() +" Estado: "+ getEstado();
+    }
+ 
 }

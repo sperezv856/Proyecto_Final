@@ -18,9 +18,10 @@ public class ObjetoJustificaciones {
     private ManejoJustificaciones manejoJustificaciones;
     private ManejoGuia manejoGuia;
     private Priorizar priorizar;
+    private ObjetoGestor objetoGestor;
 
-    public ObjetoJustificaciones(Guia guia, Justificaciones justificaciones) {
-        this.guia = guia;
+    public ObjetoJustificaciones(ObjetoGestor objetoGestor, Justificaciones justificaciones) {
+        this.objetoGestor = objetoGestor;
         this.justificaciones = justificaciones;
     }
 
@@ -40,13 +41,13 @@ public class ObjetoJustificaciones {
         this.justificaciones = justificaciones;
     }
     //En este metodo juntamos la parte de Guia con las justificaciones
-    public ObjetoJustificaciones CrearEntrada(Guia guia){
+    public ObjetoJustificaciones CrearEntrada(ObjetoGestor objetoGestor){
         System.out.println("Ingrese el Id de la justificacion:");
         int idJustificacion = scanner.nextInt();
         scanner.nextLine();
         justificaciones = manejoJustificaciones.BuscarJustificaciones(idJustificacion);
         Date fecha = new Date();
-        ObjetoJustificaciones objetoJustificaciones = new ObjetoJustificaciones(guia, justificaciones);
+        ObjetoJustificaciones objetoJustificaciones = new ObjetoJustificaciones(objetoGestor, justificaciones);
         objetoJustificaciones.justificaciones.setFecha(fecha);
         objetoJustificaciones.getGuia().getDetalle().setEstado("No entregada");
         return objetoJustificaciones;

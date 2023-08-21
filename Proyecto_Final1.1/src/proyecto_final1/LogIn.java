@@ -15,29 +15,37 @@ public class LogIn {
     private DetalleServicio detalle;
     private Guia guia;
     private Justificaciones justificaciones;
+    private ObjetoGestor objetoGestor;
+    private Mensajero mensajero;
+    private Gestor gestor;
     private Date fechaServicio = null;
-    private String observaciones = null, instrucciones = null, estado = null;
+    private String observaciones = null, instrucciones = null, estado = null, userName = null, password = null;
     private int IdServicio = 0, idGuia = 0, monto = 0;
     ManejoProductos manejoProductos = new ManejoProductos();
     ManejoCliente manejoCliente = new ManejoCliente();
+    ManejoMensajero manejoMensajero = new ManejoMensajero();
+    ManejoGestor manejoGestor = new ManejoGestor();
     ManejoGuia manejoGuia = new ManejoGuia(30);
     ManejoJustificaciones manejoJustificaciones = new ManejoJustificaciones(15);
     ManejoRutas manejoRutas = new ManejoRutas();
     ManejoArbol manejoArbol = new ManejoArbol();
     Priorizar priorizar = new Priorizar();
-    ObjetoJustificaciones objetoJustificaciones = new ObjetoJustificaciones(guia, justificaciones);
-
-    public void IniciarDatos() {
+    ObjetoJustificaciones objetoJustificaciones = new ObjetoJustificaciones(objetoGestor, justificaciones);
+    ClienteUsuario clienteUsuario = new ClienteUsuario(cliente, userName, password);
+    MensajeroUsuario mensajeroUsuario = new MensajeroUsuario(mensajero, userName, password);
+    GestorUsuario gestorUsuario = new GestorUsuario(gestor, userName, password);
+    
+     public void IniciarDatos() {
         manejoCliente.IngresarDatosIniciales();
         manejoProductos.IngresarDatosIniciales();
     }
 
     public void LogIn() {
         ManejoUsuarios manejoUsuarios = new ManejoUsuarios();
-
-        Servicio servicio = new Servicio(fechaServicio, observaciones, instrucciones, IdServicio);
-        DetalleServicio detalle = new DetalleServicio(idGuia, monto, observaciones, estado);
-        Guia guia = new Guia(cliente, servicio, detalle, producto);
+        
+        servicio = new Servicio(fechaServicio, observaciones, instrucciones, IdServicio);
+        detalle = new DetalleServicio(idGuia, monto, observaciones, estado);
+        guia = new Guia(cliente, servicio, detalle, producto);
 
         int opcion = 0;
         Scanner scanner = new Scanner(System.in);
@@ -69,8 +77,9 @@ public class LogIn {
                             System.out.println("2. Ver lista de productos. ");
                             System.out.println("3. Crear un servicio");
                             System.out.println("4. Buscar/ Ver estado del servicio");
-                            System.out.println("5. Modificar datos personales");
-                            System.out.println("6. Salir");
+                            System.out.println("5. Revisar la ruta del pedido");
+                            System.out.println("6. Modificar datos personales");
+                            System.out.println("7. Salir");
                             System.out.println("Seleccione una opcion: ");
                             opcion = scanner.nextInt();
 
@@ -87,10 +96,12 @@ public class LogIn {
                                     manejoProductos.MostrarProductos();
                                     break;
                                 case 3:
+                                    int ced = clienteAutenticado.getCliente().getCedula();
+                                    Cliente buscarCliente = manejoCliente.buscarCliente(ced);
                                     if (manejoGuia.isEstadoServicio()) {
                                         System.out.println("Opcion deshabilitada.");
                                     } else {
-                                        guia = guia.CrearGuia(clienteAutenticado.getCliente(), servicio, detalle, manejoProductos);
+                                        guia = guia.CrearGuia(buscarCliente, servicio, detalle, manejoProductos);
                                         manejoGuia.push(guia);
                                     }
                                     break;
@@ -101,10 +112,16 @@ public class LogIn {
                                     manejoGuia.RevisarDetalle();
                                     break;
                                 case 5:
-                                    int ced = clienteAutenticado.getCliente().getCedula();
-                                    manejoCliente.ModificarCliente(ced);
+                                    System.out.println("Ingrese el numero de Guia a buscar: ");
+                                    idGuia = scanner.nextInt();
+                                    priorizar.buscarPorId(idGuia);
+                                    priorizar.mostrarRuta(idGuia);
                                     break;
                                 case 6:
+                                    ced = clienteAutenticado.getCliente().getCedula();
+                                    manejoCliente.ModificarCliente(ced);
+                                    break;
+                                case 7:
                                     System.out.println("Regresando");
                                     continuar = false;
 
@@ -215,6 +232,7 @@ public class LogIn {
                                 case 14:
                                     guia = manejoGuia.popGuia();
                                     System.out.println("Guia: " + guia.toString());
+                                    objetoGestor.setGuia(guia);
                                     continuar = true;
                                     while (continuar) {
                                         System.out.println(" -------------- Opciones -----------------");
@@ -225,11 +243,11 @@ public class LogIn {
                                         opcion = scanner.nextInt();
                                         switch (opcion) {
                                             case 1:
-                                                priorizar.ingresarAlInicio(guia);
+                                                priorizar.ingresarAlInicio(objetoGestor);
                                                 guia.getDetalle().setEstado("En transito");
                                                 break;
                                             case 2:
-                                                priorizar.ingresarAlFinal(guia);
+                                                priorizar.ingresarAlFinal(objetoGestor);
                                                 guia.getDetalle().setEstado("En transito");
                                                 break;
                                             case 3:
@@ -284,7 +302,7 @@ public class LogIn {
                                 case 25:
                                     System.out.println("Ingrese el id de la guia a eliminar: ");
                                     idGuia = scanner.nextInt();
-                                    Guia guiaEliminada=priorizar.eliminarPorId(idGuia);
+                                    ObjetoGestor guiaEliminada=priorizar.eliminarPorId(idGuia);
                                     if (guiaEliminada != null) {
                                         objetoJustificaciones.CrearEntrada(guiaEliminada);
                                         manejoArbol.insertar(objetoJustificaciones);
@@ -360,30 +378,32 @@ public class LogIn {
                     username = scanner.next();
                     System.out.println("Ingrese su contraseña: ");
                     password = scanner.next();
+                    Usuario nuevoUsuario = null;
                     if (tipoCuenta.equalsIgnoreCase("Cliente")) {
-                        ManejoCliente manejocliente = new ManejoCliente();
-                        Cliente cliente = manejocliente.crearCliente();
-                        manejocliente.IngresarCliente(cliente);
-                        ClienteUsuario clienteUsuario = new ClienteUsuario(cliente, username, password);
-                        manejoUsuarios.AgregarUsuario(clienteUsuario);
+                        //ManejoCliente manejocliente = new ManejoCliente();
+                        Cliente cliente = manejoCliente.crearCliente();
+                        manejoCliente.IngresarCliente(cliente);
+                        nuevoUsuario = new ClienteUsuario(cliente, username, password);
+                        manejoUsuarios.AgregarUsuario(nuevoUsuario);
                         break;
                     } else if (tipoCuenta.equalsIgnoreCase("Mensajero")) {
-                        ManejoMensajero manejoMensajero = new ManejoMensajero();
+                        //ManejoMensajero manejoMensajero = new ManejoMensajero();
                         Mensajero mensajero = manejoMensajero.crearMensajero();
                         manejoMensajero.IngresarMensajero(mensajero);
-                        MensajeroUsuario mensajeroUsuario = new MensajeroUsuario(mensajero, username, password);
-                        manejoUsuarios.AgregarUsuario(mensajeroUsuario);
+                        nuevoUsuario = new MensajeroUsuario(mensajero, username, password);
+                        manejoUsuarios.AgregarUsuario(nuevoUsuario);
                         break;
                     } else if (tipoCuenta.equalsIgnoreCase("Gestor")) {
-                        ManejoGestor manejoGestor = new ManejoGestor();
+                        //ManejoGestor manejoGestor = new ManejoGestor();
                         Gestor gestor = manejoGestor.crearGestor();
                         manejoGestor.IngresarGestor(gestor);
-                        GestorUsuario gestorUsuario = new GestorUsuario(gestor, username, password);
-                        manejoUsuarios.AgregarUsuario(gestorUsuario);
+                        nuevoUsuario = new GestorUsuario(gestor, username, password);
+                        manejoUsuarios.AgregarUsuario(nuevoUsuario);
                         break;
                     } else {
                         System.out.println("Opcion no valida");
                     }
+                    
                     break;
                 case 3:
                     System.out.println("Saliendo");

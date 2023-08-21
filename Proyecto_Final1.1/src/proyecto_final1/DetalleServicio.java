@@ -103,9 +103,14 @@ public class DetalleServicio {
         DetalleServicio detalle = new DetalleServicio(idGuia, detMonto, observaciones, estado);
         detalle.setIdGuia(idGuia);
         detalle.setObservaciones(observaciones);
-        detalle.setMonto(monto);
+        detalle.setMonto(detMonto);
         detalle.setEstado(estado);
         return detalle;
+    }
+
+    @Override
+    public String toString() {
+        return "Id Guia: "+ getIdGuia()+ " Observaciones: "+getObservaciones()+ " Monto: "+ getMonto()+ " Estado del servicio: "+ getEstado();
     }
 
 }
