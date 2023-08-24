@@ -49,28 +49,36 @@ public class ManejoProductos {
     }
 
     public TipoProducto crearProducto() {
-        System.out.println("Indique el ID del producto: ");
-        int id = scanner.nextInt();
-        scanner.nextLine();
-        System.out.println("Indique las observaciones del producto: ");
-        String observaciones = scanner.nextLine();
-        System.out.println("Indique el Monto del producto: ");
-        int monto = scanner.nextInt();
-        scanner.nextLine();
-        System.out.println("Indique el Estado del producto: ");
-        String estado = scanner.nextLine();
-        TipoProducto producto = new TipoProducto(id, monto, observaciones, estado);
-        producto.setIdTipoProducto(id);
-        producto.setObservaciones(observaciones);
-        producto.setMonto(monto);
-        producto.setEstado(estado);
-        return producto;
+        try {
+            System.out.println("Indique el ID del producto: ");
+            int id = scanner.nextInt();
+            scanner.nextLine();
+            System.out.println("Indique las observaciones del producto: ");
+            String observaciones = scanner.nextLine();
+            System.out.println("Indique el Monto del producto: ");
+            int monto = scanner.nextInt();
+            scanner.nextLine();
+            System.out.println("Indique el Estado del producto: ");
+            String estado = scanner.nextLine();
+            TipoProducto producto = new TipoProducto(id, monto, observaciones, estado);
+            producto.setIdTipoProducto(id);
+            producto.setObservaciones(observaciones);
+            producto.setMonto(monto);
+            producto.setEstado(estado);
+            return producto;
+            } catch (InputMismatchException e) {
+            System.out.println("Error: Ingreso inválido. Asegúrate de ingresar valores correctos.");
+            scanner.nextLine(); 
+            return null;
+        }
+    }
     }
     // Metodo para el ingreso de un nuevo objeto TipoProducto
 
     public void IngresarProducto(TipoProducto producto) {
-        NodoListaSimple nodoNuevo = new NodoListaSimple();
-        nodoNuevo.setProducto(producto);
+        try {
+            NodoListaSimple nodoNuevo = new NodoListaSimple();
+            nodoNuevo.setProducto(producto);
         if (getPrimero() == null) {
             setPrimero(nodoNuevo);
             setUltimo(nodoNuevo);
@@ -79,8 +87,13 @@ public class ManejoProductos {
             getUltimo().setSiguiente(nodoNuevo);
             nodoNuevo.setSiguiente(null);
             setUltimo(nodoNuevo);
+            } catch (Exception e) {
+            System.out.println("Error al ingresar el producto: " + e.getMessage());
+        }
+    
         }
     }
+        
 
     // Metodo para busqueda de un objeto TipoProducto por medio de el codigo de producto llamado cdp
     public TipoProducto buscarProducto(int cdp) {
@@ -94,6 +107,7 @@ public class ManejoProductos {
                 System.out.println("Monto: " + actual.getProducto().getMonto());
                 System.out.println("Estado: " + actual.getProducto().getEstado());
                 return actual.getProducto();
+                
             }
             actual = actual.getSiguiente();
         }
